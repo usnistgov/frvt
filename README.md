@@ -1,2 +1,2 @@
-# FRVT
+# FRVT - Face Recognition Vendor Test
 The Face Recognition Vendor Test (FRVT) provides independent government evaluation of commercially available and prototype face recognition technologies. The evaluation is designed to inform developers, policy makers, and current and prospective end-users in the private, civil and criminal government sectors with information to assist them in determining where and how facial recognition technology can be best deployed, and whether its deployment should be regulated. In addition, FRVT results help identify future research directions for the face recognition community.
