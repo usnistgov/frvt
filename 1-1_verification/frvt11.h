@@ -159,6 +159,8 @@ operator<<(
         return (s << "Template file is an incorrect format or defective");
     case ReturnCode::VendorError:
         return (s << "Vendor-defined error");
+    default:
+        return (s << "Undefined error");
     }
 }
 
