@@ -128,6 +128,8 @@ enum class ReturnCode {
     NumDataError,
     /** Template file is an incorrect format or defective */
     TemplateFormatError,
+    /** There was a problem setting or accessing the GPU */
+    GPUError,
     /** Vendor-defined failure */
     VendorError
 };
@@ -157,6 +159,8 @@ operator<<(
         return (s << "Number of input images not supported");
     case ReturnCode::TemplateFormatError:
         return (s << "Template file is an incorrect format or defective");
+    case ReturnCode::GPUError:
+        return (s << "Problem setting or accessing the GPU");
     case ReturnCode::VendorError:
         return (s << "Vendor-defined error");
     default:
@@ -255,7 +259,7 @@ typedef struct EyePair
  */
 typedef struct Attributes {
     enum class Gender {Unknown, Male, Female};
-    enum class Race {Unknown, White, Black, Asian, Hispanic};
+    enum class Race {Unknown, White, Black, East Asian, South Asian, Hispanic};
     enum class EyeGlasses {Unknown, NotWearing, Wearing};
     enum class FacialHair {Unknown, Moustache, Goatee, Beard};
     enum class SkinTone {Unknown, LightPink, LightYellow, MediumPinkBrown, MediumYellowBrown, MediumDarkBrown, DarkBrown};
@@ -385,7 +389,7 @@ public:
      * @param[in] gpuNum
      * Index number representing which GPU to use
      */
-    virtual void
+    virtual ReturnStatus
     setGPU(uint8_t gpuNum) = 0;
 
     /**
