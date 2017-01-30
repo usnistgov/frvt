@@ -259,7 +259,7 @@ typedef struct EyePair
  */
 typedef struct Attributes {
     enum class Gender {Unknown, Male, Female};
-    enum class Race {Unknown, White, Black, East Asian, South Asian, Hispanic};
+    enum class Race {Unknown, White, Black, EastAsian, SouthAsian, Hispanic};
     enum class EyeGlasses {Unknown, NotWearing, Wearing};
     enum class FacialHair {Unknown, Moustache, Goatee, Beard};
     enum class SkinTone {Unknown, LightPink, LightYellow, MediumPinkBrown, MediumYellowBrown, MediumDarkBrown, DarkBrown};
