@@ -34,21 +34,22 @@ to send to NIST, please perform the following steps:
 3) From the root validation directory, execute the validation script.
    >> ./run_validate_11.sh
 
-The validation script will
-- Install required packages that don't already exist on your system.  You will need 
-  sudo rights and connection to the Internet for this.
-- Download and prepare the validation dataset if it hasn't already been done.  
-  This also requires connection to the Internet.
-- Compile and link your library against the validation test harness. 
-- Run the test harness that was built against your library on the validation
-  dataset.
-- Prepare your submission archive. 
+   The validation script will
+   - Install required packages that don't already exist on your system.  You will need 
+     sudo rights and connection to the Internet for this.
+   - Download and prepare the validation dataset if it hasn't already been done.  
+     This also requires connection to the Internet.
+   - Compile and link your library against the validation test harness. 
+   - Run the test harness that was built against your library on the validation
+     dataset.
+   - Prepare your submission archive. 
 
 4) Upon successful validation, an archive will be generated named 
    libfrvt11_<company>_<three-digit submission sequence>_<cpu|gpu>.tar.gz
 
    This archive must be properly encrypted and signed before transmission to NIST.  
-   This must be done according to these instructions - https://www.nist.gov/sites/default/files/nist_encryption.pdf
+   This must be done according to these instructions - 
+   https://www.nist.gov/sites/default/files/nist_encryption.pdf
    using the LATEST FRVT Ongoing public key linked from - 
    https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist. 
 
@@ -59,8 +60,8 @@ The validation script will
 
 5) Send the encrypted file and your public key to NIST.  You can
 	a) Email the files to frvt@nist.gov if your package is less than 20MB OR
-	b) Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of
-	   membership on the provided website) OR
+	b) Provide a download link from a generic http webserver (NIST will NOT register 
+	   or establish any kind of membership on the provided website) OR
 	c) Mail a CD/DVD to NIST at the address provided in the participation agreement
 
 Send any questions or concerns regarding this validation package to frvt@nist.gov.
