@@ -24,6 +24,12 @@ templatesDir=$outputDir/templates
 rm -rf $outputDir 
 mkdir -p $templatesDir
 
+# Find out whether CPU or GPU implementation
+root=$(pwd)
+libstring=$(ls $root/lib/libfrvt11_*_???_[cg]pu.so)
+processor=$(basename $libstring | awk -F"_" '{ print $4 }' | awk -F"." '{ print $1 }')
+
+
 # Usage: ../bin/validate11 enroll|verif|match -c configDir -o outputDir -h outputStem -i inputFile -t numForks -j templatesDir
 #   enroll|verif|match: task to process
 #	enroll: generate enrollment templates
@@ -33,7 +39,7 @@ mkdir -p $templatesDir
 #   outputDir: directory where output logs are written to
 #   outputStem: the string to prefix the output filename(s) with
 #   inputFile: input file containing images to process (required enroll and verif template creation)
-#   numForks: number of processes to fork.  1 means don't fork 
+#   numForks: number of processes to fork
 #   templatesDir: directory where templates are written to/read from
 echo "------------------------------"
 echo " Running 1:1 validation"
@@ -56,7 +62,9 @@ else
 fi
 
 rm -rf $outputDir; mkdir -p $templatesDir
-numForks=4
+if [ "$processor" == "cpu" ]; then
+	numForks=4
+fi
 echo -n "Creating Enrollment Templates (Multiple Processes) "
 bin/validate11 enroll -c $configDir -o $outputDir -h $outputStem -i $inputFile -t $numForks -j $templatesDir
 retEnroll=$?

@@ -249,49 +249,41 @@ main(
     }
 
     bool parent = false;
-    if (numForks == 1) {
-        if (action == Action::CreateTemplate)
-            return createTemplate(
-                    implPtr,
-                    inputFileVector[0],
-                    outputDir + "/" + outputFileStem + ".log.0",
-                    templatesDir,
-                    role);
-        else if (action == Action::Match)
-            return match(
-                    implPtr,
-                    inputFileVector[0],
-                    templatesDir,
-                    outputDir + "/" + outputFileStem + ".log.0");
-    } else if (numForks > 1) {
-        int i = 0;
-        for (auto &inputFile : inputFileVector) {
-            /* Fork */
-            switch(fork()) {
-            case 0: /* Child */
-                if (action == Action::CreateTemplate)
-                    return createTemplate(
-                            implPtr,
-                            inputFile,
-                            outputDir + "/" + outputFileStem + ".log." + to_string(i),
-                            templatesDir,
-                            role);
-                else if (action == Action::Match)
-                    return match(
-                            implPtr,
-                            inputFile,
-                            templatesDir,
-                            outputDir + "/" + outputFileStem + ".log." + to_string(i));
-            case -1: /* Error */
-                cerr << "Problem forking" << endl;
-                break;
-            default: /* Parent */
-                parent = true;
-                break;
+	int i = 0;
+    for (auto &inputFile : inputFileVector) {
+		/* Fork */
+		switch(fork()) {
+		case 0: /* Child */
+            ret = implPtr->setGPU(0);
+            if (ret.code != ReturnCode::Success) {
+                cerr << "setGPU() returned error code: "
+                        << ret.code << "." << endl;
+                return FAILURE;
             }
-            i++;
-        }
-    }
+
+			if (action == Action::CreateTemplate)
+				return createTemplate(
+						implPtr,
+						inputFile,
+						outputDir + "/" + outputFileStem + ".log." + to_string(i),
+						templatesDir,
+						role);
+			else if (action == Action::Match)
+				return match(
+						implPtr,
+						inputFile,
+						templatesDir,
+						outputDir + "/" + outputFileStem + ".log." + to_string(i));
+		case -1: /* Error */
+			cerr << "Problem forking" << endl;
+			break;
+		default: /* Parent */
+			parent = true;
+			break;
+		}
+		i++;
+	}
+
 
     /* Parent -- wait for children */
     if (parent) {
