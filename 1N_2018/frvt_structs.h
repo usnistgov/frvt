@@ -153,8 +153,8 @@ enum class ReturnCode {
     InputLocationError,
     /** Memory allocation failed (e.g. out of memory) */
     MemoryError,
-	/** Function is not implemented */
-	NotImplemented,
+    /** Function is not implemented */
+    NotImplemented,
     /** Vendor-defined failure */
     VendorError
 };
