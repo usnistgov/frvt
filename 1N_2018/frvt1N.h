@@ -164,6 +164,9 @@ public:
      * parameters or run-time data files.
      * @param[in] enrollmentDir
      * The read-only top-level directory in which enrollment data was placed.
+	 * This directory will contain the gallery files produced from the
+	 * finalize() function.  The enrollment directory will always contain a
+	 * successfully finalized gallery (i.e. will never be empty).
      */
     virtual ReturnStatus
     initializeIdentification(
