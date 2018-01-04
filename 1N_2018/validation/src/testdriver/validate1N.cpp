@@ -110,7 +110,7 @@ enroll(shared_ptr<IdentInterface> &implPtr,
 int
 finalize(shared_ptr<IdentInterface> &implPtr,
         const string &edbDir,
-		const string &enrollDir)
+        const string &enrollDir)
 {
     string edb{edbDir+"/edb"}, manifest{edbDir+"/manifest"};
     /* Check file existence of edb and manifest */
@@ -132,7 +132,7 @@ finalize(shared_ptr<IdentInterface> &implPtr,
 void
 searchAndLog(
         shared_ptr<IdentInterface> &implPtr,
-        const string id,
+        const string &id,
         const vector<uint8_t> &templ,
         ofstream &candListStream,
         FRVT::ReturnStatus templGenRet)
