@@ -70,7 +70,6 @@ NullImplFRVT11::createTemplate(
 
     templ.resize(blurb.size());
     memcpy(templ.data(), blurb.c_str(), blurb.size());
-    //cout << "size of personrep template: " << tattooTemplate.getTemplateSize() << endl;
 
     for (unsigned int i=0; i<faces.size(); i++) {
         eyeCoordinates.push_back(EyePair(true, true, i, i, i+1, i+1));
