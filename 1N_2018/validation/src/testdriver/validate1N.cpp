@@ -25,11 +25,11 @@ const std::string candListHeader{"searchId candidateRank searchRetCode isAssigne
 
 int
 enroll(shared_ptr<IdentInterface> &implPtr,
-        const string &configDir,
-        const string &inputFile,
-        const string &outputLog,
-        const string &edb,
-        const string &manifest)
+    const string &configDir,
+    const string &inputFile,
+    const string &outputLog,
+    const string &edb,
+    const string &manifest)
 {
     /* Read input file */
     ifstream inputStream(inputFile);
@@ -109,8 +109,8 @@ enroll(shared_ptr<IdentInterface> &implPtr,
 
 int
 finalize(shared_ptr<IdentInterface> &implPtr,
-        const string &edbDir,
-        const string &enrollDir)
+    const string &edbDir,
+    const string &enrollDir)
 {
     string edb{edbDir+"/edb"}, manifest{edbDir+"/manifest"};
     /* Check file existence of edb and manifest */
@@ -131,11 +131,11 @@ finalize(shared_ptr<IdentInterface> &implPtr,
 
 void
 searchAndLog(
-        shared_ptr<IdentInterface> &implPtr,
-        const string &id,
-        const vector<uint8_t> &templ,
-        ofstream &candListStream,
-        FRVT::ReturnStatus templGenRet)
+    shared_ptr<IdentInterface> &implPtr,
+    const string &id,
+    const vector<uint8_t> &templ,
+    ofstream &candListStream,
+    const FRVT::ReturnStatus &templGenRet)
 {
     vector<Candidate> candidateList;
     bool decision{false};
@@ -171,10 +171,10 @@ searchAndLog(
 
 int
 search(shared_ptr<IdentInterface> &implPtr,
-		const string &configDir,
-		const string &enrollDir,
-		const string &inputFile,
-		const string &candList)
+    const string &configDir,
+    const string &enrollDir,
+    const string &inputFile,
+    const string &candList)
 {
     /* Read probes */
     ifstream inputStream(inputFile);
@@ -221,8 +221,8 @@ search(shared_ptr<IdentInterface> &implPtr,
 
 int
 insertAndDelete(shared_ptr<IdentInterface> &implPtr,
-        const string &inputFile,
-        const string &candList)
+    const string &inputFile,
+    const string &candList)
 {
     ifstream inputStream(inputFile);
     if (!inputStream.is_open()) {
@@ -300,10 +300,10 @@ void usage(const string &executable)
 
 int
 initialize(
-        shared_ptr<IdentInterface> &implPtr,
-        const string &configDir,
-        const string &enrollDir,
-        Action action)
+    shared_ptr<IdentInterface> &implPtr,
+    const string &configDir,
+    const string &enrollDir,
+    Action action)
 {
     if (action == Action::Enroll_1N) {
         /* Initialization */
