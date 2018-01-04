@@ -25,43 +25,43 @@ const std::string candListHeader{"searchId candidateRank searchRetCode isAssigne
 
 int
 enroll(shared_ptr<IdentInterface> &implPtr,
-		const string &configDir,
-		const string &inputFile,
-		const string &outputLog,
-		const string &edb,
-		const string &manifest)
+        const string &configDir,
+        const string &inputFile,
+        const string &outputLog,
+        const string &edb,
+        const string &manifest)
 {
-	/* Read input file */
-	ifstream inputStream(inputFile);
-	if (!inputStream.is_open()) {
-		cerr << "Failed to open stream for " << inputFile << "." << endl;
-		return FAILURE;
-	}
+    /* Read input file */
+    ifstream inputStream(inputFile);
+    if (!inputStream.is_open()) {
+        cerr << "Failed to open stream for " << inputFile << "." << endl;
+        return FAILURE;
+    }
 
-	/* Open output log for writing */
-	ofstream logStream(outputLog);
-	if (!logStream.is_open()) {
-		cerr << "Failed to open stream for " << outputLog << "." << endl;
-		return FAILURE;
-	}
+    /* Open output log for writing */
+    ofstream logStream(outputLog);
+    if (!logStream.is_open()) {
+        cerr << "Failed to open stream for " << outputLog << "." << endl;
+        return FAILURE;
+    }
 
-	/* header */
+    /* header */
     logStream << "id image templateSizeBytes returnCode isLeftEyeAssigned "
             "isRightEyeAssigned xleft yleft xright yright" << endl;
 
-	/* Open EDB file for writing */
-	ofstream edbStream(edb);
-	if (!edbStream.is_open()) {
-		cerr << "Failed to open stream for " << edb << "." << endl;
-		return FAILURE;
-	}
+    /* Open EDB file for writing */
+    ofstream edbStream(edb);
+    if (!edbStream.is_open()) {
+        cerr << "Failed to open stream for " << edb << "." << endl;
+        return FAILURE;
+    }
 
-	/* Open manifest for writing */
-	ofstream manifestStream(manifest);
-	if (!manifestStream.is_open()) {
-		cerr << "Failed to open stream for " << manifest << "." << endl;
-		return FAILURE;
-	}
+    /* Open manifest for writing */
+    ofstream manifestStream(manifest);
+    if (!manifestStream.is_open()) {
+        cerr << "Failed to open stream for " << manifest << "." << endl;
+        return FAILURE;
+    }
 
     string id, imagePath, desc;
     while (inputStream >> id >> imagePath >> desc) {
@@ -77,15 +77,15 @@ enroll(shared_ptr<IdentInterface> &implPtr,
         vector<EyePair> eyes;
         auto ret = implPtr->createTemplate(faces, TemplateRole::Enrollment_1N, templ, eyes);
 
-		/* Write to edb and manifest */
-		manifestStream << id << " "
-				<< templ.size() << " "
-				<< edbStream.tellp() << endl;
-		edbStream.write(
-				(char*)templ.data(),
-				templ.size());
+        /* Write to edb and manifest */
+        manifestStream << id << " "
+                << templ.size() << " "
+                << edbStream.tellp() << endl;
+        edbStream.write(
+                (char*)templ.data(),
+                templ.size());
 
-       /* Write template stats to log */
+        /* Write template stats to log */
         logStream << id << " "
                 << imagePath << " "
                 << templ.size() << " "
@@ -97,36 +97,36 @@ enroll(shared_ptr<IdentInterface> &implPtr,
                 << (eyes.size() > 0 ? eyes[0].xright : 0) << " "
                 << (eyes.size() > 0 ? eyes[0].yright : 0) << " "
                 << endl;
-	}
-	inputStream.close();
+    }
+    inputStream.close();
 
     /* Remove the input file */
     if( remove(inputFile.c_str()) != 0 )
         cerr << "Error deleting file: " << inputFile << endl;
 
-	return SUCCESS;
+    return SUCCESS;
 }
 
 int
 finalize(shared_ptr<IdentInterface> &implPtr,
-		const string &edbDir,
+        const string &edbDir,
 		const string &enrollDir)
 {
-	string edb{edbDir+"/edb"}, manifest{edbDir+"/manifest"};
-	/* Check file existence of edb and manifest */
-	if (!(ifstream(edb) && ifstream(manifest))) {
-		cerr << "EDB file: " << edb << " and/or manifest file: "
-						<< manifest << " is missing." << endl;
-		return FAILURE;
-	}
+    string edb{edbDir+"/edb"}, manifest{edbDir+"/manifest"};
+    /* Check file existence of edb and manifest */
+    if (!(ifstream(edb) && ifstream(manifest))) {
+        cerr << "EDB file: " << edb << " and/or manifest file: "
+                << manifest << " is missing." << endl;
+        return FAILURE;
+    }
 
-	auto ret = implPtr->finalizeEnrollment(enrollDir, edb, manifest, GalleryType::Unconsolidated);
-	if (ret.code != ReturnCode::Success) {
-		cerr << "finalizeEnrollment() returned error code: "
-				<< to_string(ret.code) << "." << endl;
-		return FAILURE;
-	}
-	return SUCCESS;
+    auto ret = implPtr->finalizeEnrollment(enrollDir, edb, manifest, GalleryType::Unconsolidated);
+    if (ret.code != ReturnCode::Success) {
+        cerr << "finalizeEnrollment() returned error code: "
+                << to_string(ret.code) << "." << endl;
+        return FAILURE;
+    }
+    return SUCCESS;
 }
 
 void
@@ -176,25 +176,25 @@ search(shared_ptr<IdentInterface> &implPtr,
 		const string &inputFile,
 		const string &candList)
 {
-	/* Read probes */
-	ifstream inputStream(inputFile);
-	if (!inputStream.is_open()) {
-		cerr << "Failed to open stream for " << inputFile << "." << endl;
-		return FAILURE;
-	}
+    /* Read probes */
+    ifstream inputStream(inputFile);
+    if (!inputStream.is_open()) {
+        cerr << "Failed to open stream for " << inputFile << "." << endl;
+        return FAILURE;
+    }
 
-	/* Open candidate list log for writing */
-	ofstream candListStream(candList);
-	if (!candListStream.is_open()) {
-		cerr << "Failed to open stream for " << candList << "." << endl;
-		return FAILURE;
-	}
-	/* header */
-	candListStream << candListHeader << endl;
+    /* Open candidate list log for writing */
+    ofstream candListStream(candList);
+    if (!candListStream.is_open()) {
+        cerr << "Failed to open stream for " << candList << "." << endl;
+        return FAILURE;
+    }
+    /* header */
+    candListStream << candListHeader << endl;
 
-	/* Process each probe */
-	string id, imagePath, desc;
-	while (inputStream >> id >> imagePath >> desc) {
+    /* Process each probe */
+    string id, imagePath, desc;
+    while (inputStream >> id >> imagePath >> desc) {
         Image image;
         if (!readImage(imagePath, image)) {
             cerr << "Failed to load image file: " << imagePath << "." << endl;
@@ -209,14 +209,14 @@ search(shared_ptr<IdentInterface> &implPtr,
 
         /* Do search and log results to candidatelist file */
         searchAndLog(implPtr, id, templ, candListStream, ret);
-	}
+    }
     inputStream.close();
 
     /* Remove the input file */
     if( remove(inputFile.c_str()) != 0 )
         cerr << "Error deleting file: " << inputFile << endl;
 
-	return SUCCESS;
+    return SUCCESS;
 }
 
 int
@@ -337,11 +337,11 @@ int
 main(int argc, char* argv[])
 {
     string actionstr{argv[1]},
-        configDir{"config"},
-        enrollDir{"enroll"},
-        outputDir{"output"},
-        outputFileStem{"stem"},
-        inputFile;
+    configDir{"config"},
+    enrollDir{"enroll"},
+    outputDir{"output"},
+    outputFileStem{"stem"},
+    inputFile;
     int numForks = 1;
 
     int requiredArgs = 2; /* exec name and action */
@@ -364,93 +364,93 @@ main(int argc, char* argv[])
         }
     }
 
-	auto implPtr = IdentInterface::getImplementation();
-	Action action;
-	if (actionstr == "enroll")
-	    action = Action::Enroll_1N;
-	else if(actionstr == "search")
-	    action = Action::Search_1N;
-	else if(actionstr == "finalize")
-	    action = Action::Finalize_1N;
-	else if(actionstr == "insertAndDelete")
-	    action = Action::InsertAndDelete;
-	else {
+    auto implPtr = IdentInterface::getImplementation();
+    Action action;
+    if (actionstr == "enroll")
+        action = Action::Enroll_1N;
+    else if(actionstr == "search")
+        action = Action::Search_1N;
+    else if(actionstr == "finalize")
+        action = Action::Finalize_1N;
+    else if(actionstr == "insertAndDelete")
+        action = Action::InsertAndDelete;
+    else {
         cerr << "Unknown command: " << actionstr << endl;
         usage(argv[0]);
-	}
+    }
 
-	if (action == Action::Enroll_1N || action == Action::Search_1N) {
+    if (action == Action::Enroll_1N || action == Action::Search_1N) {
         /* Initialization */
         if (initialize(implPtr, configDir, enrollDir, action) != EXIT_SUCCESS)
             return EXIT_FAILURE;
 
-	    /* Split input file into appropriate number of splits */
-	    vector<string> inputFileVector;
-	    if (splitInputFile(inputFile, outputDir, numForks, inputFileVector) != EXIT_SUCCESS) {
-	        cerr << "An error occurred with processing the input file." << endl;
-	        return EXIT_FAILURE;
-	    }
+        /* Split input file into appropriate number of splits */
+        vector<string> inputFileVector;
+        if (splitInputFile(inputFile, outputDir, numForks, inputFileVector) != EXIT_SUCCESS) {
+            cerr << "An error occurred with processing the input file." << endl;
+            return EXIT_FAILURE;
+        }
 
-	    bool parent = false;
-	    int i = 0;
-	    ReturnStatus ret;
-	    for (auto &inputFile : inputFileVector) {
-	        /* Fork */
-	        switch(fork()) {
-	        case 0: /* Child */
-	            if (action == Action::Enroll_1N)
-	                return enroll(
-	                        implPtr,
-	                        configDir,
-	                        inputFile,
-	                        outputDir + "/" + outputFileStem + "." + to_string(action) + "." + to_string(i),
-	                        outputDir + "/edb." + to_string(i),
-	                        outputDir + "/manifest." + to_string(i));
-	            else if (action == Action::Search_1N)
-	                return search(
-	                        implPtr,
-	                        configDir,
-	                        enrollDir,
-	                        inputFile,
-	                        outputDir + "/" + outputFileStem + "." + to_string(action) + "." + to_string(i));
-	        case -1: /* Error */
-	            cerr << "Problem forking" << endl;
-	            break;
-	        default: /* Parent */
-	            parent = true;
-	            break;
-	        }
-	        i++;
-	    }
+        bool parent = false;
+        int i = 0;
+        ReturnStatus ret;
+        for (auto &inputFile : inputFileVector) {
+            /* Fork */
+            switch(fork()) {
+            case 0: /* Child */
+                if (action == Action::Enroll_1N)
+                    return enroll(
+                            implPtr,
+                            configDir,
+                            inputFile,
+                            outputDir + "/" + outputFileStem + "." + to_string(action) + "." + to_string(i),
+                            outputDir + "/edb." + to_string(i),
+                            outputDir + "/manifest." + to_string(i));
+                else if (action == Action::Search_1N)
+                    return search(
+                            implPtr,
+                            configDir,
+                            enrollDir,
+                            inputFile,
+                            outputDir + "/" + outputFileStem + "." + to_string(action) + "." + to_string(i));
+            case -1: /* Error */
+                cerr << "Problem forking" << endl;
+                break;
+            default: /* Parent */
+                parent = true;
+                break;
+            }
+            i++;
+        }
 
-	    /* Parent -- wait for children */
-	    if (parent) {
-	        while (numForks > 0) {
-	            int stat_val;
-	            pid_t cpid;
+        /* Parent -- wait for children */
+        if (parent) {
+            while (numForks > 0) {
+                int stat_val;
+                pid_t cpid;
 
-	            cpid = wait(&stat_val);
-	            if (WIFEXITED(stat_val)) {}
-	            else if (WIFSIGNALED(stat_val))
-	                cerr << "PID " << cpid << " exited due to signal " <<
-	                        WTERMSIG(stat_val) << endl;
-	            else
-	                cerr << "PID " << cpid << " exited with unknown status." << endl;
+                cpid = wait(&stat_val);
+                if (WIFEXITED(stat_val)) {}
+                else if (WIFSIGNALED(stat_val))
+                    cerr << "PID " << cpid << " exited due to signal " <<
+                    WTERMSIG(stat_val) << endl;
+                else
+                    cerr << "PID " << cpid << " exited with unknown status." << endl;
 
-	            numForks--;
-	        }
-	    }
-	} else if (action == Action::Finalize_1N) {
-	    return finalize(implPtr, outputDir, enrollDir);
-	} else if (action == Action::InsertAndDelete) {
+                numForks--;
+            }
+        }
+    } else if (action == Action::Finalize_1N) {
+        return finalize(implPtr, outputDir, enrollDir);
+    } else if (action == Action::InsertAndDelete) {
         /* Initialization */
         if (initialize(implPtr, configDir, enrollDir, action) != EXIT_SUCCESS)
             return EXIT_FAILURE;
 
-	    return insertAndDelete(implPtr,
-	            inputFile,
-	            outputDir + "/" + outputFileStem + "." + to_string(action));
-	}
+        return insertAndDelete(implPtr,
+                inputFile,
+                outputDir + "/" + outputFileStem + "." + to_string(action));
+    }
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

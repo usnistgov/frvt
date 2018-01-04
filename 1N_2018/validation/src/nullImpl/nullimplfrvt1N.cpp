@@ -24,20 +24,19 @@ NullImplFRVT1N::~NullImplFRVT1N() {}
 
 ReturnStatus
 NullImplFRVT1N::initializeTemplateCreation(
-    const std::string &configDir,
-    TemplateRole role)
+        const std::string &configDir,
+        TemplateRole role)
 {
     // Load some stuff from the configuration directory, etc...
-
     return ReturnStatus(ReturnCode::Success);
 }
 
 ReturnStatus
 NullImplFRVT1N::createTemplate(
-    const Multiface &faces,
-    TemplateRole role,
-    std::vector<uint8_t> &templ,
-    std::vector<EyePair> &eyeCoordinates)
+        const Multiface &faces,
+        TemplateRole role,
+        std::vector<uint8_t> &templ,
+        std::vector<EyePair> &eyeCoordinates)
 {
     auto templString = std::to_string(faces.size()) +
             " Somewhere out there, beneath the pale moon light\n";
@@ -52,10 +51,10 @@ NullImplFRVT1N::createTemplate(
 
 ReturnStatus
 NullImplFRVT1N::finalizeEnrollment(
-    const std::string &enrollmentDir,
-    const std::string &edbName,
-    const std::string &edbManifestName,
-    GalleryType galleryType)
+        const std::string &enrollmentDir,
+        const std::string &edbName,
+        const std::string &edbManifestName,
+        GalleryType galleryType)
 {
     ifstream edbsrc(edbName, ios::binary);
     ofstream edbdest(enrollmentDir+"/"+this->edb, ios::binary);
@@ -70,8 +69,8 @@ NullImplFRVT1N::finalizeEnrollment(
 
 ReturnStatus
 NullImplFRVT1N::initializeIdentification(
-    const std::string &configDir,
-    const std::string &enrollmentDir)
+        const std::string &configDir,
+        const std::string &enrollmentDir)
 {
     auto edbManifestName = enrollmentDir + "/" + this->manifest;
     auto edbName = enrollmentDir + "/" + this->edb;
@@ -103,10 +102,10 @@ NullImplFRVT1N::initializeIdentification(
 
 ReturnStatus
 NullImplFRVT1N::identifyTemplate(
-    const std::vector<uint8_t> &idTemplate,
-    const uint32_t candidateListLength,
-    std::vector<Candidate> &candidateList,
-    bool &decision)
+        const std::vector<uint8_t> &idTemplate,
+        const uint32_t candidateListLength,
+        std::vector<Candidate> &candidateList,
+        bool &decision)
 {
     std::vector<std::string> templateIds;
     for (auto const& element : this->templates)
@@ -122,8 +121,8 @@ NullImplFRVT1N::identifyTemplate(
 
 ReturnStatus
 NullImplFRVT1N::galleryInsertID(
-    const std::vector<uint8_t> &templ,
-    const std::string &id)
+        const std::vector<uint8_t> &templ,
+        const std::string &id)
 {
     this->templates.insert(std::make_pair(id, templ));
 
