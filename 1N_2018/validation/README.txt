@@ -23,8 +23,8 @@ The ./images directory will contain a few existing images, and the validation sc
 download and prepare the remainder of the images required for validation. 
 Your machine must have access to the Internet in order to download the images.  
 
-NOTE: The validation images are used for the sole purpose of validation/stress-testing and are not necessarily 
-representative of actual test data that will be used to evaluate the implementations.
+NOTE: The validation images are used for the sole purpose of validation/stress-testing the algorithm 
+and are not necessarily representative of actual test data that will be used to evaluate the implementations.
 
 ===============================
 Validation and Submission Preparation
