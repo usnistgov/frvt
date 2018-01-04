@@ -72,8 +72,8 @@ to_string(Action action)
  */
 bool
 readImage(
-        const string &file,
-        Image &image)
+    const string &file,
+    Image &image)
 {
     /* Open PPM file. */
     ifstream input(file, ios::binary);
@@ -116,10 +116,10 @@ readImage(
 
 int
 splitInputFile(
-        const string &inputFile,
-        const string &outputDir,
-        int &numForks,
-        vector<string> &fileVector)
+    const string &inputFile,
+    const string &outputDir,
+    int &numForks,
+    vector<string> &fileVector)
 {
     /* Read input file */
     ifstream inputStream(inputFile);
