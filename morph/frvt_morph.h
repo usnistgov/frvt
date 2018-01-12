@@ -14,6 +14,8 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <memory>
+#include <iostream>
 
 namespace FRVT_MORPH {
 /**
@@ -75,8 +77,6 @@ enum class ReturnCode {
     MatchError,
     /** Unable to detect a face in the image */
     FaceDetectionError,
-    /** Memory allocation failed (e.g. out of memory) */
-    MemoryError,
     /** Function is not implemented */
     NotImplemented,
     /** Vendor-defined failure */
