@@ -190,8 +190,10 @@ public:
      * @brief This function sets the GPU device number to be used by all
      * subsequent implementation function calls.  gpuNum is a zero-based
      * sequence value of which GPU device to use.  0 would mean the first
-     * detected GPU, 1 would be the second GPU, etc.  If the implementation
-     * does not use GPUs, then this function call should simply do nothing.
+     * detected GPU, 1 would be the second GPU, etc.
+     *
+     * If this function is not implemented, the algorithm shall return
+     * ReturnCode::NotImplemented.
      *
      * @param[in] gpuNum
      * Index number representing which GPU to use
