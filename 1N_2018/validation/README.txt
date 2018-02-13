@@ -34,11 +34,13 @@ to send to NIST, please perform the following steps:
 0) Ensure yum is installed on your system.  Yum is required, because it will 
    download and install all packages required for validation.
 
-1) Put all required configuration files into ./config
+1) Put all required configuration files into ./config.
 
 2) Put your core implementation library and ALL dependent libraries into ./lib.
 
-3) From the root validation directory, execute the validation script that corresponds
+3) Put a version.txt file into ./doc, which provides version control information for the submission.
+
+4) From the root validation directory, execute the validation script that corresponds
    to your submission.  
    >> ./run_validation_1N.sh
 
@@ -52,7 +54,7 @@ The validation script will
   dataset.
 - Prepare your submission archive. 
 
-4) Upon successful validation, an archive will be generated and named
+5) Upon successful validation, an archive will be generated and named
    libfrvt1N_<company>_<one-digit submission sequence>.tar.gz
 
    This archive must be properly encrypted and signed before transmission to NIST.  
@@ -65,7 +67,7 @@ The validation script will
 	--encrypt --recipient frvt@nist.gov --sign \\
 	libfrvt1N_<company>_<one-digit submission sequence>.tar.gz
 
-5) Send the encrypted file and your public key to NIST.  You can
+6) Send the encrypted file and your public key to NIST.  You can
 	a) Email the files to frvt@nist.gov if your package is less than 20MB OR
 	b) Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of
 	   membership on the provided website) OR
