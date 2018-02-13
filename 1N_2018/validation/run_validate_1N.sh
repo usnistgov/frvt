@@ -86,7 +86,7 @@ echo "[SUCCESS]"
 echo -n "Creating submission package "
 libstring=$(basename `ls ./lib/libfrvt1N_*_?.so`)
 libstring=${libstring%.so}
-tar -zcf $libstring.tar.gz ./config ./lib ./validation
+tar -zcf $libstring.tar.gz ./doc ./config ./lib ./validation
 echo "[SUCCESS]"
 echo "
 #################################################################################################################
