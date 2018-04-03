@@ -43,7 +43,7 @@ to_string(ReturnCode code)
     case ReturnCode::VerifTemplateError: return "VerifTemplateError";
     case ReturnCode::NumDataError: return "NumDataError";
     case ReturnCode::TemplateFormatError: return "TemplateFormatError";
-    case ReturnCode::GPUError: return "GPUError";
+    case ReturnCode::NotImplemented: return "NotImplemented";
     case ReturnCode::VendorError: return "VendorError";
     default: return "Unknown ReturnCode";
     }

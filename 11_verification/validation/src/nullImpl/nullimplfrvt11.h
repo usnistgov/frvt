@@ -33,14 +33,12 @@ public:
     initialize(const std::string &configDir) override;
 
     ReturnStatus
-    setGPU(uint8_t gpuNum) override;
-
-    ReturnStatus
     createTemplate(
             const Multiface &faces,
             TemplateRole role,
             std::vector<uint8_t> &templ,
-            std::vector<EyePair> &eyeCoordinates) override;
+            std::vector<EyePair> &eyeCoordinates,
+            std::vector<double> &quality) override;
 
     ReturnStatus
     matchTemplates(
@@ -53,7 +51,6 @@ public:
 
 private:
     std::string configDir;
-    uint8_t whichGPU;
     int counter;
     // Some other members
 };

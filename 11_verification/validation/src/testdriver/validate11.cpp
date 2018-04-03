@@ -66,7 +66,7 @@ createTemplate(
 
     /* header */
     logStream << "id image templateSizeBytes returnCode isLeftEyeAssigned "
-            "isRightEyeAssigned xleft yleft xright yright" << endl;
+            "isRightEyeAssigned xleft yleft xright yright quality" << endl;
 
     string id, imagePath, desc;
     while (inputStream >> id >> imagePath >> desc) {
@@ -80,7 +80,8 @@ createTemplate(
         Multiface faces{image};
         vector<uint8_t> templ;
         vector<EyePair> eyes;
-        auto ret = implPtr->createTemplate(faces, role, templ, eyes);
+        vector<double> quality;
+        auto ret = implPtr->createTemplate(faces, role, templ, eyes, quality);
 
         /* Open template file for writing */
         string templFile{id + ".template"};
@@ -104,6 +105,7 @@ createTemplate(
                 << (eyes.size() > 0 ? eyes[0].yleft : 0) << " "
                 << (eyes.size() > 0 ? eyes[0].xright : 0) << " "
                 << (eyes.size() > 0 ? eyes[0].yright : 0) << " "
+                << quality[0]
                 << endl;
     }
     inputStream.close();
@@ -254,13 +256,6 @@ main(
 		/* Fork */
 		switch(fork()) {
 		case 0: /* Child */
-            ret = implPtr->setGPU(0);
-            if (ret.code != ReturnCode::Success) {
-                cerr << "setGPU() returned error code: "
-                        << ret.code << "." << endl;
-                return FAILURE;
-            }
-
 			if (action == Action::CreateTemplate)
 				return createTemplate(
 						implPtr,

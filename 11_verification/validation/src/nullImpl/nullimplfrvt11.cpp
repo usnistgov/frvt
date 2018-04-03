@@ -41,22 +41,14 @@ NullImplFRVT11::train(
         const std::string &trainedConfigDir,
         const std::vector<faceAttributePair> &faces)
 {
-    return ReturnStatus(ReturnCode::Success);
+    return ReturnStatus(ReturnCode::NotImplemented);
 }
 
 ReturnStatus
 NullImplFRVT11::initialize(const std::string &configDir)
 {
-    this->whichGPU = 0;
     this->counter = 0;
     return ReturnStatus(ReturnCode::Success);
-}
-
-ReturnStatus
-NullImplFRVT11::setGPU(uint8_t gpuNum)
-{
-    this->whichGPU = gpuNum;
-	return ReturnStatus(ReturnCode::Success);
 }
 
 ReturnStatus
@@ -64,15 +56,18 @@ NullImplFRVT11::createTemplate(
         const Multiface &faces,
         TemplateRole role,
         std::vector<uint8_t> &templ,
-        std::vector<EyePair> &eyeCoordinates)
+        std::vector<EyePair> &eyeCoordinates,
+        std::vector<double> &quality)
 {
     string blurb{"Somewhere out there, beneath the pale moon light\n"};
 
     templ.resize(blurb.size());
     memcpy(templ.data(), blurb.c_str(), blurb.size());
+    //cout << "size of personrep template: " << tattooTemplate.getTemplateSize() << endl;
 
     for (unsigned int i=0; i<faces.size(); i++) {
         eyeCoordinates.push_back(EyePair(true, true, i, i, i+1, i+1));
+        quality.push_back(88.0);
     }
 
     return ReturnStatus(ReturnCode::Success);
