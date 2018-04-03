@@ -128,8 +128,8 @@ enum class ReturnCode {
     NumDataError,
     /** Template file is an incorrect format or defective */
     TemplateFormatError,
-    /** There was a problem setting or accessing the GPU */
-    GPUError,
+    /** Function is not implemented */
+    NotImplemented,
     /** Vendor-defined failure */
     VendorError
 };
@@ -159,8 +159,8 @@ operator<<(
         return (s << "Number of input images not supported");
     case ReturnCode::TemplateFormatError:
         return (s << "Template file is an incorrect format or defective");
-    case ReturnCode::GPUError:
-        return (s << "Problem setting or accessing the GPU");
+    case ReturnCode::NotImplemented:
+        return (s << "Function is not implemented");
     case ReturnCode::VendorError:
         return (s << "Vendor-defined error");
     default:
@@ -345,13 +345,25 @@ public:
      * estimated eye centers. This will be an empty vector when passed into the
      * function, and the implementation shall populate it with the appropriate
      * number of entries.  Values in eyeCoordinates[i] shall correspond to faces[i].
+     * param[out] quality
+     * For each image in the faces vector, an assessment of image quality.
+     * This will be an empty vector when passed into the function, and the
+     * implementation shall populate it with the appropriate number of entries.
+     * Values in quality[i] shall correspond to faces[i].  The legal values are
+     * [0,100] - The value should have a monotonic decreasing relationship with
+     * false non-match rate anticipated for this sample if it was compared with
+     * a pristine image of the same person.  So, a low value indicates high
+     * expected FNMR.
+     * A value of -1.0 indicates a failed attempt to calculate a quality
+     * score or the value is unassigned.
      */
     virtual ReturnStatus
     createTemplate(
         const Multiface &faces,
         TemplateRole role,
         std::vector<uint8_t> &templ,
-        std::vector<EyePair> &eyeCoordinates) = 0;
+        std::vector<EyePair> &eyeCoordinates,
+        std::vector<double> &quality) = 0;
 
     /**
      * @brief This function compares two proprietary templates and outputs a
@@ -378,19 +390,6 @@ public:
         const std::vector<uint8_t> &verifTemplate,
         const std::vector<uint8_t> &enrollTemplate,
         double &similarity) = 0;
-
-    /**
-     * @brief This function sets the GPU device number to be used by all
-     * subsequent implementation function calls.  gpuNum is a zero-based
-     * sequence value of which GPU device to use.  0 would mean the first
-     * detected GPU, 1 would be the second GPU, etc.  If the implementation
-     * does not use GPUs, then this function call should simply do nothing.
-     *
-     * @param[in] gpuNum
-     * Index number representing which GPU to use
-     */
-    virtual ReturnStatus
-    setGPU(uint8_t gpuNum) = 0;
 
     /**
      * @brief This function provides the implementation with face images and
