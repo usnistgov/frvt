@@ -17,7 +17,7 @@ echo "[SUCCESS]"
 # Download and process validation images
 # Check if the images have already been downloaded first
 numImages=$(ls images/*.ppm | wc -l)
-if [ "$numImages" -ne "1308" ]; then
+if [ "$numImages" -ne "1316" ]; then
 	scripts/get_images.sh
 	retcode=$?
 	if [ $retcode -ne 0 ]; then
@@ -32,7 +32,6 @@ retcode=$?
 if [[ $retcode != 0 ]]; then
 	exit $failure
 fi
-
 
 # Run testdriver against linked library
 # and validation images
@@ -65,9 +64,18 @@ echo "[SUCCESS]"
 
 # Create submission archive
 echo -n "Creating submission package "
-libstring=$(basename `ls ./lib/libfrvt11_*_???_[cg]pu.so`)
+libstring=$(basename `ls ./lib/libfrvt11_*_???_cpu.so`)
 libstring=${libstring%.so}
-tar -zcf $libstring.tar.gz ./config ./lib ./validation
+
+for directory in config lib validation doc
+do
+if [ ! -d "$directory" ]; then
+	echo "[ERROR] Could not create submission package.  The $directory directory is missing."
+	exit $failure	
+fi
+
+done
+tar -zcf $libstring.tar.gz ./config ./lib ./validation ./doc
 echo "[SUCCESS]"
 echo "
 #################################################################################################################
@@ -81,7 +89,7 @@ https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwa
 For example:
       gpg --default-key <ParticipantEmail> --output <filename>.gpg \\\\
       --encrypt --recipient frvt@nist.gov --sign \\\\
-      libfrvt11_<company>_<three-digit submission sequence>_<cpu|gpu>.tar.gz
+      libfrvt11_<company>_<three-digit submission sequence>_cpu.tar.gz
 
 Send the encrypted file and your public key to NIST.  You can
       a) Email the files to frvt@nist.gov if your package is less than 20MB OR

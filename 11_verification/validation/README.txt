@@ -15,9 +15,12 @@ Validation Dataset
 ===============================
 The ./images directory will contain a few existing images, and the validation script will 
 download and prepare the remainder of the images required for validation. 
-Your machine must have access to the Internet in order to download the images.  The 
-validation images are used for the sole purpose of validation and are not necessarily 
-representative of actual test data that will be used to evaluate the implementations.
+Your machine must have access to the Internet in order to download the images.  
+
+NOTE: The validation images are used for the sole purpose of validation and stress-testing
+your software.  The images are not necessarily representative of actual test data that will 
+be used to evaluate the implementations.  Please do not contact NIST about actual testing
+with such validation-type imagery.
 
 ===============================
 Validation and Submission Preparation
@@ -31,37 +34,39 @@ to send to NIST, please perform the following steps:
 
 2) Put your core implementation library and ALL dependent libraries into ./lib
 
-3) From the root validation directory, execute the validation script.
+3) Put a version.txt file into ./doc, which provides version control information for the submission.
+
+4) From the root validation directory, execute the validation script.
    >> ./run_validate_11.sh
 
-   The validation script will
-   - Install required packages that don't already exist on your system.  You will need 
-     sudo rights and connection to the Internet for this.
-   - Download and prepare the validation dataset if it hasn't already been done.  
-     This also requires connection to the Internet.
-   - Compile and link your library against the validation test harness. 
-   - Run the test harness that was built against your library on the validation
-     dataset.
-   - Prepare your submission archive. 
+The validation script will
+- Install required packages that don't already exist on your system.  You will need 
+  sudo rights and connection to the Internet for this.
+- Download and prepare the validation dataset if it hasn't already been done.  
+  This also requires connection to the Internet.
+- Compile and link your library against the validation test harness. 
+- Run the test harness that was built against your library on the validation
+  dataset.
+- Prepare your submission archive. 
 
-4) Upon successful validation, an archive will be generated named 
-   libfrvt11_<company>_<three-digit submission sequence>_<cpu|gpu>.tar.gz
+5) Upon successful validation, an archive will be generated named 
+   libfrvt11_<company>_<three-digit submission sequence>_cpu.tar.gz
 
    This archive must be properly encrypted and signed before transmission to NIST.  
-   This must be done according to these instructions - 
-   https://www.nist.gov/sites/default/files/nist_encryption.pdf
+   This must be done according to these instructions - https://www.nist.gov/sites/default/files/nist_encryption.pdf
    using the LATEST FRVT Ongoing public key linked from - 
    https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist. 
 
    For example:
 	gpg --default-key <ParticipantEmail> --output <filename>.gpg \\
 	--encrypt --recipient frvt@nist.gov --sign \\
-	libfrvt11_<company>_<three-digit submission sequence>_<cpu|gpu>.tar.gz
+	libfrvt11_<company>_<three-digit submission sequence>_cpu.tar.gz
 
-5) Send the encrypted file and your public key to NIST.  You can
+6) Send the encrypted file and your public key to NIST.  You can
 	a) Email the files to frvt@nist.gov if your package is less than 20MB OR
-	b) Provide a download link from a generic http webserver (NIST will NOT register 
-	   or establish any kind of membership on the provided website) OR
+	b) Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of
+	   membership on the provided website).  The preferred mechanism is Google Drive.  We do NOT accept
+	   Dropbox links. OR
 	c) Mail a CD/DVD to NIST at the address provided in the participation agreement
 
 Send any questions or concerns regarding this validation package to frvt@nist.gov.
@@ -75,6 +80,6 @@ linked with the participant's libraries.  In addition, NIST will perform
 a separate timing test to ensure the implementation meets the timing requirements
 for certain tasks as detailed in the FRVT Ongoing API document.
 
-Any discrepencies will be reported to the participant, and reasonable attempts
+Any discrepancies will be reported to the participant, and reasonable attempts
 will be made to resolve the issue. 
 

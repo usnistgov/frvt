@@ -18,17 +18,14 @@ function merge() {
         done
 }
 
+# Configuration directory is always READ-ONLY
 configDir=config
+chmod -R 550 $configDir
+
 outputDir=validation
 templatesDir=$outputDir/templates
 rm -rf $outputDir 
 mkdir -p $templatesDir
-
-# Find out whether CPU or GPU implementation
-root=$(pwd)
-libstring=$(ls $root/lib/libfrvt11_*_???_[cg]pu.so)
-processor=$(basename $libstring | awk -F"_" '{ print $4 }' | awk -F"." '{ print $1 }')
-
 
 # Usage: ../bin/validate11 enroll|verif|match -c configDir -o outputDir -h outputStem -i inputFile -t numForks -j templatesDir
 #   enroll|verif|match: task to process
@@ -62,9 +59,8 @@ else
 fi
 
 rm -rf $outputDir; mkdir -p $templatesDir
-if [ "$processor" == "cpu" ]; then
-	numForks=4
-fi
+numForks=4
+
 echo -n "Creating Enrollment Templates (Multiple Processes) "
 bin/validate11 enroll -c $configDir -o $outputDir -h $outputStem -i $inputFile -t $numForks -j $templatesDir
 retEnroll=$?

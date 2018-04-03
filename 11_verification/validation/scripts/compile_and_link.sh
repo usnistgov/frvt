@@ -2,7 +2,7 @@
 success=0
 failure=1
 
-FRVTLIB="libfrvt11_<company>_<three digit sequence>_<cpu|gpu>.so"
+FRVTLIB="libfrvt11_<company>_<three digit sequence>_cpu.so"
 root=$(pwd)
 approot=$root/bin
 libroot=$root/lib
@@ -10,7 +10,7 @@ libroot=$root/lib
 echo -n "Looking for core implementation library in $libroot."
 # Get libraries into a string to
 # pass into Makefile
-numLibs=$(ls $libroot/libfrvt11_*_???_[cg]pu.so | wc -l)
+numLibs=$(ls $libroot/libfrvt11_*_???_cpu.so | wc -l)
 if [ $numLibs -eq 0 ]; then
 	echo "[ERROR] Could not find core implementation library in $libroot.  Please make sure your core implementation library is named according to the required naming convention - $FRVTLIB and placed in $libroot."
 	exit $failure
@@ -19,7 +19,7 @@ elif [ $numLibs -gt 1 ]; then
 	exit $failure
 fi
 
-libstring=$(ls $libroot/libfrvt11_*_???_[cg]pu.so)
+libstring=$(ls $libroot/libfrvt11_*_???_cpu.so)
 echo "[SUCCESS] Found core implementation library $libstring."
 
 # We need to set this env variable that gets passed
