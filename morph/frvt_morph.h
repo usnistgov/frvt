@@ -77,8 +77,6 @@ enum class ReturnCode {
     MatchError,
     /** Unable to detect a face in the image */
     FaceDetectionError,
-    /** There was a problem setting or accessing the GPU */
-    GPUError,
     /** Function is not implemented */
     NotImplemented,
     /** Vendor-defined failure */
@@ -106,8 +104,6 @@ operator<<(
         return (s << "Error occurred during the 1:1 match operation");
     case ReturnCode::FaceDetectionError:
         return (s << "Unable to detect a face in the image");
-    case ReturnCode::GPUError:
-        return (s << "Problem setting or accessing the GPU");
     case ReturnCode::NotImplemented:
         return (s << "Function is not implemented");
     case ReturnCode::VendorError:
@@ -185,21 +181,6 @@ public:
     virtual ReturnStatus
     initialize(
         const std::string &configDir) = 0;
-
-    /**
-     * @brief This function sets the GPU device number to be used by all
-     * subsequent implementation function calls.  gpuNum is a zero-based
-     * sequence value of which GPU device to use.  0 would mean the first
-     * detected GPU, 1 would be the second GPU, etc.
-     *
-     * If this function is not implemented, the algorithm shall return
-     * ReturnCode::NotImplemented.
-     *
-     * @param[in] gpuNum
-     * Index number representing which GPU to use
-     */
-    virtual ReturnStatus
-    setGPU(uint8_t gpuNum) = 0;
 
     /**
      * @brief This function takes an input image and outputs
