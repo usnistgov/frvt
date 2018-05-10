@@ -1,5 +1,5 @@
 ===============================
-FRVT-MORPH validation package, NIST
+FRVT MORPH validation package, NIST
 ===============================
 The purpose of this validation package is to 
 1) ensure that NIST's execution of your library submission produces the expected output and
@@ -22,10 +22,10 @@ representative of actual test data that will be used to evaluate the implementat
 ===============================
 Null Implementation
 ===============================
-There is a null implementation of the FRVT-MORPH API in ./src/nullImpl.  While the 
+There is a null implementation of the FRVT MORPH API in ./src/nullImpl.  While the 
 null implementation doesn't actually provide any real functionality, more importantly, 
 it demonstrates mechanically how one could go about implementing, compiling, and building 
-a library against the FRVT-MORPH API.
+a library against the FRVT MORPH API.
 
 To compile and build the null implementation, from the top level validation directory
 run ./scripts/buildImpl.sh.  This will place the implementation library into ./lib.
