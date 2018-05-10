@@ -1,5 +1,5 @@
 ===============================
-FRVT validation package, NIST
+FRVT-MORPH validation package, NIST
 ===============================
 The purpose of this validation package is to 
 1) ensure that NIST's execution of your library submission produces the expected output and
