@@ -1,0 +1,8 @@
+images/scanned_001.ppm
+images/scanned_002.ppm
+images/scanned_003.ppm
+images/scanned_004.ppm
+images/scanned_005.ppm
+images/scanned_006.ppm
+images/scanned_007.ppm
+images/scanned_008.ppm

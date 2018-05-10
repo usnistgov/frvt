@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -std=c++11 -O3 -DNDEBUG   -shared -Wl,-soname,libfrvtmorph_null_001.so -o /mnt/hgfs/mngan/FRVT/validation/morph/lib/libfrvtmorph_null_001.so CMakeFiles/frvtmorph_null_001.dir/nullimplfrvtmorph.cpp.o 

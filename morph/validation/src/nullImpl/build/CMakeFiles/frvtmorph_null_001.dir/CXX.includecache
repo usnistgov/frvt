@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../include/frvt_morph.h
+cstdint
+-
+string
+-
+vector
+-
+memory
+-
+iostream
+-
+
+/mnt/hgfs/mngan/FRVT/validation/morph/src/nullImpl/nullimplfrvtmorph.cpp
+cstring
+-
+nullimplfrvtmorph.h
+/mnt/hgfs/mngan/FRVT/validation/morph/src/nullImpl/nullimplfrvtmorph.h
+
+/mnt/hgfs/mngan/FRVT/validation/morph/src/nullImpl/nullimplfrvtmorph.h
+frvt_morph.h
+/mnt/hgfs/mngan/FRVT/validation/morph/src/nullImpl/frvt_morph.h
+
