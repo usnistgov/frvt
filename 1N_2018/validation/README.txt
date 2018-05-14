@@ -13,13 +13,13 @@ http://nigos.nist.gov:8080/evaluations/CentOS-7-x86_64-Everything-1511.iso.
 ===============================
 IMPORTANT NOTES
 ===============================
-1) We’ve updated the validation package to test your software on template generation from multiple input images.
-   Please ensure your software can handle multi-image template generation.  Some of our tests will require
-   the processing of up to 1500 images in a single template.
+1) We’ve updated the validation package to test your software on template generation from multiple 
+   input images.  Please ensure your software can handle multi-image template generation.  Some of 
+   our tests will require the processing of up to 1500 images in a single template.
 
-2) Please confirm that your software can handle very very large enrollment database sizes.  Specifically, please ensure
-   that your software (especially during finalize and search) can handle processing an EDB (enrollment database) 
-   that exceeds 2^32 bytes in size.
+2) Please confirm that your software can handle very very large enrollment database sizes.  Specifically, 
+   please ensure that your software (especially during finalize and search) can handle processing 
+   an EDB (enrollment database) that exceeds 2^32 bytes in size.
 
 3) Your software must run on all of the compute architectures specified in the API document.  
    Your software must operate on machines that do not support AVX/FMA instructions.  Please ensure
@@ -84,8 +84,8 @@ The validation script will
 
 6) Send the encrypted file and your public key to NIST.  You can
 	a) Email the files to frvt@nist.gov if your package is less than 20MB OR
-	b) Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of
-	   membership on the provided website) OR
+	b) Provide a download link from a generic http webserver (NIST will NOT register or 
+	   establish any kind of membership on the provided website) OR
 	c) Mail a CD/DVD to NIST at the address provided in the participation agreement
 
 Send any questions or concerns regarding this validation package to frvt@nist.gov.
