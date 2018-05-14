@@ -36,4 +36,14 @@ if [ ! -f "bin/validate1N" ]; then
 	exit $failure
 fi
 echo "[SUCCESS] Built executable in $approot."
+
+# Check for avx instructions and throw up a warning
+# if detected.  The submission should run on CPUs
+# that do not have avx instructions, per the API document
+avxOutput=$(nm $libroot/libfrvt1N_*_?.so | grep avx)
+
+if [ "$avxOutput" != "" ]; then
+	echo "[WARNING] avx instructions were detected in your library!  Please verify that your library operates on machines that do not support avx instructions."
+fi
+
 exit $success

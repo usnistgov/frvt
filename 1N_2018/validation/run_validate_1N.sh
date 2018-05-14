@@ -33,7 +33,6 @@ if [[ $retcode != 0 ]]; then
 	exit $failure
 fi
 
-
 # Run testdriver against linked library
 # and validation images
 scripts/run_testdriver.sh
@@ -81,6 +80,13 @@ do
 	fi
 done
 echo "[SUCCESS]"
+
+# Check for ./doc/version.txt
+if [ ! -s "./doc/version.txt" ]; then
+	echo "[ERROR] ./doc/version.txt was not found.  Per the API document, ./doc/version.txt must document versioning information for the submitted software."
+	echo "Please fix this and re-run."
+	exit
+fi
 
 # Create submission archive
 echo -n "Creating submission package "

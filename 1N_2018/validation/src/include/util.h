@@ -29,6 +29,22 @@ enum class Action {
     InsertAndDelete
 };
 
+/** @brief This function takes splits an input string
+ * based on a provided delimiter
+ *
+ * @param[in] str
+ * String to split
+ * @param[in] delimiter
+ * Delimiter to split on
+ *
+ * @return
+ * Vector of strings, split on delimiter
+ */
+std::vector<std::string>
+split(
+        const std::string &str,
+        const char delimiter);
+
 /** @brief This function converts a
  * string to an FRVT::Image::Label
  *

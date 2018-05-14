@@ -63,16 +63,28 @@ enroll(shared_ptr<IdentInterface> &implPtr,
         return FAILURE;
     }
 
-    string id, imagePath, desc;
-    while (inputStream >> id >> imagePath >> desc) {
-        Image image;
-        if (!readImage(imagePath, image)) {
-            cerr << "Failed to load image file: " << imagePath << "." << endl;
-            return FAILURE;
-        }
-        image.description = getLabel(desc);
+    string id, line;
 
-        Multiface faces{image};
+    //while (inputStream >> id >> imagePath >> desc) {
+    while (std::getline(inputStream, line)) {
+        auto tokens = split(line, ' ');
+        id = tokens[0];
+        // Get number of image entries in line
+        auto numImages = (tokens.size() - 1)/2;
+
+        Multiface faces;
+        for (unsigned int i=0; i<numImages; i++) {
+            Image image;
+            string imagePath = tokens[(i*2)+1];
+            string desc = tokens[(i*2)+2];
+            if (!readImage(imagePath, image)) {
+                cerr << "Failed to load image file: " << imagePath << "." << endl;
+                return FAILURE;
+            }
+            image.description = getLabel(desc);
+            faces.push_back(image);
+        }
+
         vector<uint8_t> templ;
         vector<EyePair> eyes;
         auto ret = implPtr->createTemplate(faces, TemplateRole::Enrollment_1N, templ, eyes);
@@ -85,18 +97,29 @@ enroll(shared_ptr<IdentInterface> &implPtr,
                 (char*)templ.data(),
                 templ.size());
 
-        /* Write template stats to log */
-        logStream << id << " "
-                << imagePath << " "
-                << templ.size() << " "
-                << static_cast<std::underlying_type<ReturnCode>::type>(ret.code) << " "
-                << (eyes.size() > 0 ? eyes[0].isLeftAssigned : false) << " "
-                << (eyes.size() > 0 ? eyes[0].isRightAssigned : false) << " "
-                << (eyes.size() > 0 ? eyes[0].xleft : 0) << " "
-                << (eyes.size() > 0 ? eyes[0].yleft : 0) << " "
-                << (eyes.size() > 0 ? eyes[0].xright : 0) << " "
-                << (eyes.size() > 0 ? eyes[0].yright : 0) << " "
-                << endl;
+        if (faces.size() != eyes.size()) {
+            cerr << "Error processing input "
+                    "ID " << id <<
+                    ", the number of eye coordinates returned (" << eyes.size() <<
+                    ") does not match the number of input images (" << faces.size() << ") !" << endl;
+            return FAILURE;
+        }
+
+        for (unsigned int i=0; i<faces.size(); i++) {
+            /* Write template stats to log */
+            string imagePath = tokens[(i*2)+1];
+            logStream << id << " "
+                    << imagePath << " "
+                    << templ.size() << " "
+                    << static_cast<std::underlying_type<ReturnCode>::type>(ret.code) << " "
+                    << eyes[i].isLeftAssigned << " "
+                    << eyes[i].isRightAssigned << " "
+                    << eyes[i].xleft << " "
+                    << eyes[i].yleft << " "
+                    << eyes[i].xright << " "
+                    << eyes[i].yright << " "
+                    << endl;
+        }
     }
     inputStream.close();
 
@@ -336,6 +359,7 @@ initialize(
 int
 main(int argc, char* argv[])
 {
+    auto exitStatus = SUCCESS;
     string actionstr{argv[1]},
     configDir{"config"},
     enrollDir{"enroll"},
@@ -430,12 +454,15 @@ main(int argc, char* argv[])
                 pid_t cpid;
 
                 cpid = wait(&stat_val);
-                if (WIFEXITED(stat_val)) {}
-                else if (WIFSIGNALED(stat_val))
+                if (WIFEXITED(stat_val)) { exitStatus = WEXITSTATUS(stat_val); }
+                else if (WIFSIGNALED(stat_val)) {
                     cerr << "PID " << cpid << " exited due to signal " <<
                     WTERMSIG(stat_val) << endl;
-                else
+                    exitStatus = FAILURE;
+                } else {
                     cerr << "PID " << cpid << " exited with unknown status." << endl;
+                    exitStatus = FAILURE;
+                }
 
                 numForks--;
             }
@@ -452,5 +479,5 @@ main(int argc, char* argv[])
                 outputDir + "/" + outputFileStem + "." + to_string(action));
     }
 
-    return EXIT_SUCCESS;
+    return exitStatus;
 }
