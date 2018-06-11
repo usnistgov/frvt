@@ -295,7 +295,7 @@ insertAndDelete(shared_ptr<IdentInterface> &implPtr,
     candListStream << candListHeader << endl;
 
     /* Incrementally insert entries 2 to N and search with entry 1 */
-    for( unsigned int i=1; i<ids.size(); i++ ) {
+    for (unsigned int i=1; i<ids.size(); i++) {
         auto ret = implPtr->galleryInsertID(
                 templates[i],
                 ids[i]);
@@ -305,7 +305,7 @@ insertAndDelete(shared_ptr<IdentInterface> &implPtr,
     }
 
     /* Incrementally delete entries 2 to N and search with entry 1 */
-    for( unsigned int i=1; i<ids.size(); i++ ) {
+    for (unsigned int i=1; i<ids.size(); i++) {
         auto ret = implPtr->galleryDeleteID(ids[i]);
 
         /* Do search and log results to candidatelist file */
@@ -328,7 +328,7 @@ initialize(
     const string &enrollDir,
     Action action)
 {
-    if (action == Action::Enroll_1N) {
+    if (action == Action::Enroll_1N || action == Action::Finalize_1N) {
         /* Initialization */
         auto ret = implPtr->initializeTemplateCreation(configDir, TemplateRole::Enrollment_1N);
         if (ret.code != ReturnCode::Success) {
@@ -392,11 +392,11 @@ main(int argc, char* argv[])
     Action action;
     if (actionstr == "enroll")
         action = Action::Enroll_1N;
-    else if(actionstr == "search")
+    else if (actionstr == "search")
         action = Action::Search_1N;
-    else if(actionstr == "finalize")
+    else if (actionstr == "finalize")
         action = Action::Finalize_1N;
-    else if(actionstr == "insertAndDelete")
+    else if (actionstr == "insertAndDelete")
         action = Action::InsertAndDelete;
     else {
         cerr << "Unknown command: " << actionstr << endl;
@@ -468,6 +468,11 @@ main(int argc, char* argv[])
             }
         }
     } else if (action == Action::Finalize_1N) {
+        /* Invoke initialization to support implementations
+         * that need access to the configuration directory during finalization */
+        if (initialize(implPtr, configDir, enrollDir, action) != EXIT_SUCCESS)
+            return EXIT_FAILURE;
+
         return finalize(implPtr, outputDir, enrollDir);
     } else if (action == Action::InsertAndDelete) {
         /* Initialization */
