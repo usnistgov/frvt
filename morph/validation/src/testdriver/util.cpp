@@ -19,6 +19,20 @@ using namespace FRVT_MORPH;
 
 static const string inputFileStem = "input.txt.";
 
+FRVT_MORPH::ImageLabel
+getLabel(const Action &action)
+{
+    switch (action) {
+    case Action::DetectNonScannedMorph: return ImageLabel::NonScanned;
+    case Action::DetectScannedMorph: return ImageLabel::Scanned;
+    case Action::DetectUnknownMorph: return ImageLabel::Unknown;
+    case Action::DetectNonScannedMorphWithProbeImg: return ImageLabel::NonScanned;
+    case Action::DetectScannedMorphWithProbeImg: return ImageLabel::Scanned;
+    case Action::DetectUnknownMorphWithProbeImg: return ImageLabel::Unknown;
+    default: return ImageLabel::Unknown;
+    }
+}
+
 const char*
 to_string(ReturnCode code)
 {

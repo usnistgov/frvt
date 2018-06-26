@@ -25,12 +25,26 @@
  * the test harness
  */
 enum class Action {
-    DetectSingleMorph,
+    DetectNonScannedMorph,
     DetectScannedMorph,
-    DetectMorphWithLiveImg,
-    Match
+    DetectUnknownMorph,
+    DetectNonScannedMorphWithProbeImg,
+    DetectScannedMorphWithProbeImg,
+    DetectUnknownMorphWithProbeImg,
+    Compare
 };
 
+/** @brief This function returns the image label associated with
+ * the Action enum
+ *
+ * @param[in] action
+ * ReturnCode
+ *
+ * @return
+ * Associated image label
+ */
+FRVT_MORPH::ImageLabel
+getLabel(const Action &action);
 
 /** @brief This function reads a PPM file into a FRVT::Image data
  * structure

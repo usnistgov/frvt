@@ -24,8 +24,8 @@ mkdir -p $configDir
 outputDir=validation
 rm -rf $outputDir; mkdir $outputDir
 
-# Usage: ../bin/validate detectSingleMorph|detectScannedMorph|detectMorphWithLiveImg|match -c configDir -o outputDir -i inputFile -t numForks
-#   detectSingleMorph|detectScannedMorph|detectMorphWithLiveImg|match: task to process
+# Usage: ../bin/validate detectNonScannedMorph|detectScannedMorph|detectUnknownMorph|detectNonScannedMorphWithProbeImg|detectScannedMorphWithProbeImg|detectUnknownMorphWithProbeImg|compare -c configDir -o outputDir -i inputFile -t numForks
+#   detectScannedMorph ...: task to process
 #   configDir: configuration directory
 #   outputDir: directory where output logs are written to
 #   inputFile: input file containing images to process
@@ -37,7 +37,7 @@ echo "------------------------------"
 # Set number of child processes to fork()
 numForks=2
 
-for action in detectSingleMorph detectScannedMorph detectMorphWithLiveImg match
+for action in detectNonScannedMorph detectScannedMorph detectUnknownMorph detectNonScannedMorphWithProbeImg detectScannedMorphWithProbeImg detectUnknownMorphWithProbeImg compare
 do
 	inputFile=input/${action}.txt
 	echo -n "Running $action "

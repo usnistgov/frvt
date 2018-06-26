@@ -23,18 +23,24 @@ using namespace FRVT_MORPH;
 
 std::map<std::string, Action> mapStringToAction =
 {
-    { "detectSingleMorph", Action::DetectSingleMorph },
+    { "detectNonScannedMorph", Action::DetectNonScannedMorph },
     { "detectScannedMorph", Action::DetectScannedMorph },
-    { "detectMorphWithLiveImg", Action::DetectMorphWithLiveImg },
-    { "match", Action::Match },
+    { "detectUnknownMorph", Action::DetectUnknownMorph },
+    { "detectNonScannedMorphWithProbeImg", Action::DetectNonScannedMorphWithProbeImg },
+    { "detectScannedMorphWithProbeImg", Action::DetectScannedMorphWithProbeImg },
+    { "detectUnknownMorphWithProbeImg", Action::DetectUnknownMorphWithProbeImg },
+    { "compare", Action::Compare },
 };
 
 std::map<Action, std::string> mapActionToString =
 {
-    { Action::DetectSingleMorph, "detectSingleMorph" },
+    { Action::DetectNonScannedMorph, "detectNonScannedMorph" },
     { Action::DetectScannedMorph, "detectScannedMorph" },
-    { Action::DetectMorphWithLiveImg, "detectMorphWithLiveImg" },
-    { Action::Match, "match" },
+    { Action::DetectUnknownMorph, "detectUnknownMorph" },
+    { Action::DetectNonScannedMorphWithProbeImg, "detectNonScannedMorphWithProbeImg" },
+    { Action::DetectScannedMorphWithProbeImg, "detectScannedMorphWithProbeImg" },
+    { Action::DetectUnknownMorphWithProbeImg, "detectUnknownMorphWithProbeImg" },
+    { Action::Compare, "compare" },
 };
 
 int
@@ -60,14 +66,14 @@ detectMorph(
 
     string line;
     ReturnStatus ret;
-    if (action == Action::DetectSingleMorph || action == Action::DetectScannedMorph) {
+    if (action == Action::DetectNonScannedMorph || action == Action::DetectScannedMorph || action == Action::DetectUnknownMorph ) {
         logStream << "image isMorph score returnCode" << endl;
-    } else if (action == Action::DetectMorphWithLiveImg) {
-        logStream << "image liveImage isMorph score returnCode" << endl;
+    } else if (action == Action::DetectNonScannedMorphWithProbeImg || action == Action::DetectScannedMorphWithProbeImg) {
+        logStream << "image probeImage isMorph score returnCode" << endl;
     }
 
     while(std::getline(inputStream, line)) {
-        Image image, liveImage;
+        Image image, probeImage;
         auto imgs = split(line, ' ');
         if (!readImage(imgs[0], image)) {
             cerr << "Failed to load image file: " << imgs[0] << "." << endl;
@@ -76,16 +82,18 @@ detectMorph(
         bool isMorph = false;
         double score = -1.0;
 
-        if (action == Action::DetectSingleMorph) {
-            ret = implPtr->detectMorph(image, isMorph, score);
-        } else if (action == Action::DetectScannedMorph) {
-            ret = implPtr->detectScannedMorph(image, isMorph, score);
-        } else if (action == Action::DetectMorphWithLiveImg) {
-            if (!readImage(imgs[1], liveImage)) {
+        if (action == Action::DetectNonScannedMorph ||
+                action == Action::DetectScannedMorph ||
+                action == Action::DetectUnknownMorph) {
+            ret = implPtr->detectMorph(image, getLabel(action), isMorph, score);
+        } else if (action == Action::DetectNonScannedMorphWithProbeImg ||
+                action == Action::DetectScannedMorphWithProbeImg ||
+                action == Action::DetectUnknownMorphWithProbeImg) {
+            if (!readImage(imgs[1], probeImage)) {
                 cerr << "Failed to load image file(s): " << imgs[1] << "." << endl;
                 return FAILURE;
             }
-            ret = implPtr->detectMorph(image, liveImage, isMorph, score);
+            ret = implPtr->detectMorphDifferentially(image, getLabel(action), probeImage, isMorph, score);
         }
 
         /* If function is not implemented, clean up and exit */
@@ -95,7 +103,9 @@ detectMorph(
 
         /* Write template stats to log */
         logStream << imgs[0] << " ";
-        if (action == Action::DetectMorphWithLiveImg)
+        if (action == Action::DetectNonScannedMorphWithProbeImg ||
+                action == Action::DetectScannedMorphWithProbeImg ||
+                action == Action::DetectUnknownMorphWithProbeImg)
             logStream << imgs[1] << " ";
 
         logStream << isMorph << " "
@@ -120,7 +130,7 @@ detectMorph(
 }
 
 int
-match(
+compare(
         std::shared_ptr<MorphInterface> &implPtr,
         const string &inputFile,
         const string &scoresLog)
@@ -156,8 +166,8 @@ match(
         }
 
         double similarity = -1.0;
-        /* Call match */
-        ret = implPtr->matchImages(enrollImage, verifImage, similarity);
+        /* Call compare */
+        ret = implPtr->compareImages(enrollImage, verifImage, similarity);
 
         /* If function is not implemented, clean up and exit */
         if (ret.code == ReturnCode::NotImplemented) {
@@ -190,7 +200,14 @@ match(
 
 void usage(const string &executable)
 {
-    cerr << "Usage: " << executable << " detectSingleMorph|detectScannedMorph|detectMorphWithLiveImg|match -c configDir "
+    cerr << "Usage: " << executable <<
+            " detectNonScannedMorph"
+            "|detectScannedMorph"
+            "|detectUnknownMorph"
+            "|detectNonScannedMorphWithProbeImg"
+            "|detectScannedMorphWithProbeImg"
+            "|detectUnknownMorphWithProbeImg"
+            "|compare -c configDir "
             "-o outputDir -h outputStem -i inputFile -t numForks" << endl;
     exit(EXIT_FAILURE);
 }
@@ -231,10 +248,13 @@ main(
 
     Action action = mapStringToAction[actionstr];
     switch (action) {
-        case Action::DetectSingleMorph:
+        case Action::DetectNonScannedMorph:
         case Action::DetectScannedMorph:
-        case Action::DetectMorphWithLiveImg:
-        case Action::Match:
+        case Action::DetectUnknownMorph:
+        case Action::DetectNonScannedMorphWithProbeImg:
+        case Action::DetectScannedMorphWithProbeImg:
+        case Action::DetectUnknownMorphWithProbeImg:
+        case Action::Compare:
             break;
         default:
             cerr << "Unknown command: " << actionstr << endl;
@@ -265,16 +285,19 @@ main(
 		switch(fork()) {
 		case 0: /* Child */
             switch (action) {
-                case Action::DetectSingleMorph:
+                case Action::DetectNonScannedMorph:
                 case Action::DetectScannedMorph:
-                case Action::DetectMorphWithLiveImg:
+                case Action::DetectUnknownMorph:
+                case Action::DetectNonScannedMorphWithProbeImg:
+                case Action::DetectScannedMorphWithProbeImg:
+                case Action::DetectUnknownMorphWithProbeImg:
                     return detectMorph(
                             implPtr,
                             inputFile,
                             outputDir + "/" + outputFileStem + ".log." + to_string(i),
                             action);
-                case Action::Match:
-                    return match(
+                case Action::Compare:
+                    return compare(
                             implPtr,
                             inputFile,
                             outputDir + "/" + outputFileStem + ".log." + to_string(i));

@@ -1,0 +1,6 @@
+images/IMG_3760_morph.ppm images/live_001.ppm
+images/IMG_3760_morph.ppm images/live_002.ppm
+images/IMG_3753_morph.ppm images/live_003.ppm
+images/IMG_3744_morph.ppm images/live_004.ppm
+images/IMG_8888_morph.ppm images/live_8886.ppm
+images/IMG_8888_morph.ppm images/live_8887.ppm

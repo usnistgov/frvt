@@ -1,0 +1,6 @@
+images/scanned_007_morph.ppm images/live_001.ppm
+images/scanned_007_morph.ppm images/live_002.ppm
+images/scanned_005_morph.ppm images/live_003.ppm
+images/scanned_001_morph.ppm images/live_004.ppm
+images/scanned_8888_morph.ppm images/live_8886.ppm
+images/scanned_8888_morph.ppm images/live_8887.ppm

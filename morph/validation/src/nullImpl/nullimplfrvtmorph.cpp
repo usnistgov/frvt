@@ -38,43 +38,46 @@ NullImplFRVTMorph::initialize(
 ReturnStatus
 NullImplFRVTMorph::detectMorph(
     const Image &suspectedMorph,
+    const ImageLabel &label,
     bool &isMorph,
     double &score)
 {
+    if (label==ImageLabel::Scanned)
+        return ReturnStatus(ReturnCode::NotImplemented);
+
     isMorph = true;
     score = 0.99;
     return ReturnStatus(ReturnCode::Success);
 }
 
 ReturnStatus
-NullImplFRVTMorph::detectMorph(
+NullImplFRVTMorph::detectMorphDifferentially(
     const Image &suspectedMorph,
+    const ImageLabel &label,
     const Image &liveFace,
     bool &isMorph,
     double &score)
 {
-    return ReturnStatus(ReturnCode::NotImplemented);
-}
+    if (label==ImageLabel::Unknown)
+        return ReturnStatus(ReturnCode::NotImplemented);
 
-ReturnStatus
-NullImplFRVTMorph::detectScannedMorph(
-    const Image &image,
-    bool &isMorph,
-    double &score)
-{
-    isMorph = false;
-    score = 0.11;
+    if (label==ImageLabel::NonScanned) {
+        isMorph = false;
+        score = 0.003;
+    } else if (label==ImageLabel::Scanned)
+        isMorph = true;
+        score = 0.81;
     return ReturnStatus(ReturnCode::Success);
 }
 
 ReturnStatus
-NullImplFRVTMorph::matchImages(
+NullImplFRVTMorph::compareImages(
     const Image &enrollImage,
     const Image &verifImage,
     double &similarity)
 {
     similarity = 0.88;
-    return ReturnStatus(ReturnCode::NotImplemented);
+    return ReturnStatus(ReturnCode::Success);
 }
 
 std::shared_ptr<MorphInterface>

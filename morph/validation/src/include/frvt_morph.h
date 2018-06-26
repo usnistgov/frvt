@@ -18,6 +18,17 @@
 #include <iostream>
 
 namespace FRVT_MORPH {
+
+/** Labels describing the type of image */
+enum class ImageLabel {
+    /** Image type is unknown or unassigned */
+    Unknown = 0,
+    /** Non-scanned image */
+    NonScanned = 1,
+    /** Printed-and-scanned image */
+    Scanned = 2
+};
+
 /**
  * @brief
  * Struct representing a single image
@@ -190,10 +201,17 @@ public:
      * is not a morph and 1 representing absolute confidence that it is a morph
      *
      * If this function is not implemented, the algorithm shall return
-     * ReturnCode::NotImplemented.
+     * ReturnCode::NotImplemented.  If this function is not implemented for
+     * a certain type of image, for example, the function supports non-scanned
+     * photos but not scanned photos, then the function should return
+     * ReturnCode::NotImplemented when the function is called with the particular
+     * unsupported image type.
      *
      * @param[in] suspectedMorph
-     * The input Image object.
+     * Input image
+     * @param[in] label
+     * Label indicating the type of imagery for the suspected morph.  Possible
+     * types are non-scanned photo, printed-and-scanned photo, or unknown.
      * @param[out] isMorph
      * True if image contains a morph; False otherwise
      * @param[out] score
@@ -204,6 +222,7 @@ public:
     virtual ReturnStatus
     detectMorph(
         const Image &suspectedMorph,
+        const ImageLabel &label,
         bool &isMorph,
         double &score) = 0;
 
@@ -212,63 +231,44 @@ public:
      * image of the subject and an image of the same subject that's in question
      * (may or may not be a morph).  This function outputs
      * 1. a binary decision on whether <b>suspectedMorph</b> is a morph
-     * (given <b>knownFace</b> as a prior)
+     * (given <b>probeFace</b> as a prior)
      * 2. a "morphiness" score on [0, 1] indicating how confident the algorithm
      * thinks the image is a morph, with 0 meaning confidence that the image
      * is not a morph and 1 representing absolute confidence that it is a morph
      *
      * If this function is not implemented, the algorithm shall return
-     * ReturnCode::NotImplemented.
+     * ReturnCode::NotImplemented.  If this function is not implemented for
+     * a certain type of image, for example, the function supports non-scanned
+     * photos but not scanned photos, then the function should return
+     * ReturnCode::NotImplemented when the function is called with the particular
+     * unsupported image type.
      *
      * @param[in] suspectedMorph
-     * The image in question of being a morph (or not)
-     * @param[in] liveFace
+     * An image in question of being a morph (or not)
+     * @param[in] label
+     * Label indicating the type of imagery for the suspected morph.  Possible
+     * types are non-scanned photo, printed-and-scanned photo, or unknown.
+     * @param[in] probeFace
      * An image of the subject known not to be a morph (i.e., live capture
      * image)
      * @param[out] isMorph
-     * True suspectedMorph image contains a morph; False otherwise
+     * True if suspectedMorph image contains a morph; False otherwise
      * @param[out] score
      * A score on [0, 1] representing how confident the algorithm is that the
      * image contains a morph.  0 means certainty that image does not contain
      * a morph and 1 represents certainty that image contains a morph
      */
     virtual ReturnStatus
-    detectMorph(
+    detectMorphDifferentially(
         const Image &suspectedMorph,
-        const Image &liveFace,
-        bool &isMorph,
-        double &score) = 0;
-
-
-    /**
-     * @brief This function takes a scanned input image (that is, a photo
-     * that is printed, then scanned) and outputs
-     * 1. a binary decision on whether the image is a morph
-     * 2. a "morphiness" score on [0, 1] indicating how confident the algorithm
-     * thinks the image is a morph, with 0 meaning confidence that the image
-     * is not a morph and 1 representing absolute confidence that it is a morph
-     *
-     * If this function is not implemented, the algorithm shall return
-     * ReturnCode::NotImplemented.
-     *
-     * @param[in] image
-     * The input Image object.
-     * @param[out] isMorph
-     * True if image is a morph; False otherwise
-     * @param[out] score
-     * A score on [0, 1] representing how confident the algorithm is that the
-     * image contains a morph.  0 means certainty that image does not contain
-     * a morph and 1 represents certainty that image contains a morph
-     */
-    virtual ReturnStatus
-    detectScannedMorph(
-        const Image &image,
+        const ImageLabel &label,
+        const Image &probeFace,
         bool &isMorph,
         double &score) = 0;
 
     /**
      * @brief This function compares two images and outputs a
-     * similarity score. In the event the algorithm cannot perform the matching
+     * similarity score. In the event the algorithm cannot perform the comparison
      * operation, the similarity score shall be set to -1 and the function
      * return code value shall be set appropriately.
      *
@@ -285,7 +285,7 @@ public:
      *
      */
     virtual ReturnStatus
-    matchImages(
+    compareImages(
         const Image &enrollImage,
         const Image &verifImage,
         double &similarity) = 0;

@@ -37,24 +37,20 @@ public:
     ReturnStatus
     detectMorph(
         const Image &suspectedMorph,
+        const ImageLabel &label,
         bool &isMorph,
         double &score) override;
 
     ReturnStatus
-    detectMorph(
+    detectMorphDifferentially(
         const Image &suspectedMorph,
+        const ImageLabel &label,
         const Image &liveFace,
         bool &isMorph,
         double &score) override;
 
     ReturnStatus
-    detectScannedMorph(
-        const Image &image,
-        bool &isMorph,
-        double &score) override;
-
-    ReturnStatus
-    matchImages(
+    compareImages(
         const Image &enrollImage,
         const Image &verifImage,
         double &similarity) override;
