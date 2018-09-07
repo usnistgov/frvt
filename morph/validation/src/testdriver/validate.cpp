@@ -1,5 +1,4 @@
 /**
- * This software was developed at the National Institute of Standards and
  * Technology (NIST) by employees of the Federal Government in the course
  * of their official duties. Pursuant to title 17 Section 105 of the
  * United States Code, this software is not subject to copyright protection
@@ -224,6 +223,7 @@ main(
 
     string actionstr{argv[1]},
         configDir{"config"},
+        configValue{""},
         outputDir{"output"},
         outputFileStem{"stem"},
         inputFile;
@@ -232,6 +232,8 @@ main(
     for (int i = 0; i < argc - requiredArgs; i++) {
         if (strcmp(argv[requiredArgs+i],"-c") == 0)
             configDir = argv[requiredArgs+(++i)];
+        else if (strcmp(argv[requiredArgs+i],"-v") == 0)
+            configValue = argv[requiredArgs+(++i)];
         else if (strcmp(argv[requiredArgs+i],"-o") == 0)
             outputDir = argv[requiredArgs+(++i)];
         else if (strcmp(argv[requiredArgs+i],"-h") == 0)
@@ -264,7 +266,7 @@ main(
     /* Get implementation pointer */
     auto implPtr = MorphInterface::getImplementation();
     /* Initialization */
-    auto ret = implPtr->initialize(configDir);
+    auto ret = implPtr->initialize(configDir, configValue);
     if (ret.code != ReturnCode::Success) {
         cerr << "initialize() returned error code: "
                 << ret.code << "." << endl;

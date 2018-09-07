@@ -32,7 +32,8 @@ public:
 
     ReturnStatus
     initialize(
-        const std::string &configDir) override;
+        const std::string &configDir,
+        const std::string &configValue) override;
 
     ReturnStatus
     detectMorph(

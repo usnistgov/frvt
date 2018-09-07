@@ -19,6 +19,7 @@ function merge() {
 }
 
 configDir=config
+configValue=""
 mkdir -p $configDir
 
 outputDir=validation
@@ -27,6 +28,7 @@ rm -rf $outputDir; mkdir $outputDir
 # Usage: ../bin/validate detectNonScannedMorph|detectScannedMorph|detectUnknownMorph|detectNonScannedMorphWithProbeImg|detectScannedMorphWithProbeImg|detectUnknownMorphWithProbeImg|compare -c configDir -o outputDir -i inputFile -t numForks
 #   detectScannedMorph ...: task to process
 #   configDir: configuration directory
+#   configValue: configuration parameter string
 #   outputDir: directory where output logs are written to
 #   inputFile: input file containing images to process
 #   numForks: number of processes to fork
@@ -42,7 +44,7 @@ do
 	inputFile=input/${action}.txt
 	echo -n "Running $action "
 
-	bin/validate $action -c $configDir -o $outputDir -i $inputFile -t $numForks -h $action
+	bin/validate $action -c $configDir -v "$configValue" -o $outputDir -i $inputFile -t $numForks -h $action
 	retEnroll=$?
 	if [[ $retEnroll == 0 ]]; then
 		echo "[SUCCESS]"

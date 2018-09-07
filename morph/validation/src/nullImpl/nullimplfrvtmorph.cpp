@@ -30,7 +30,8 @@ NullImplFRVTMorph::trainMorphDetector(
 
 ReturnStatus
 NullImplFRVTMorph::initialize(
-    const std::string &configDir)
+    const std::string &configDir,
+    const std::string &configValue)
 {
     return ReturnStatus(ReturnCode::Success);
 }

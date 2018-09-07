@@ -188,10 +188,13 @@ public:
      * @param[in] configDir
      * A read-only directory containing any developer-supplied configuration
      * parameters or run-time data files.
+     * @param[in] configValue
+     * An optional string value encoding developer-specific configuration parameters
      */
     virtual ReturnStatus
     initialize(
-        const std::string &configDir) = 0;
+        const std::string &configDir,
+        const std::string &configValue) = 0;
 
     /**
      * @brief This function takes an input image and outputs
