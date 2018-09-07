@@ -51,6 +51,7 @@ NullImplFRVT1N::createTemplate(
 
 ReturnStatus
 NullImplFRVT1N::finalizeEnrollment(
+    const std::string &configDir,
     const std::string &enrollmentDir,
     const std::string &edbName,
     const std::string &edbManifestName,
@@ -143,8 +144,3 @@ IdentInterface::getImplementation()
 {
     return make_shared<NullImplFRVT1N>();
 }
-
-
-
-
-

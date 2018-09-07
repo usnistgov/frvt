@@ -120,6 +120,9 @@ public:
       *
       * This function will be called from a single process/thread.
       *
+      * @param[in] configDir
+      * A read-only directory containing any developer-supplied configuration
+      * parameters or run-time data files.
       * @param[in] enrollmentDir
       * The top-level directory in which enrollment data was placed. This
       * variable allows an implementation
@@ -145,6 +148,7 @@ public:
       */
     virtual ReturnStatus
     finalizeEnrollment(
+        const std::string &configDir,
         const std::string &enrollmentDir,
         const std::string &edbName,
         const std::string &edbManifestName,

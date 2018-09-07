@@ -38,6 +38,7 @@ public:
 
     ReturnStatus
     finalizeEnrollment(
+        const std::string &configDir,
         const std::string &enrollmentDir,
         const std::string &edbName,
         const std::string &edbManifestName,

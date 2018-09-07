@@ -53,7 +53,9 @@ chmod -R 550 $configDir
 outputDir=validation
 outputStem=validation
 enrollDir=$outputDir/enroll
-chmod -R 777 $outputDir; rm -rf $outputDir 
+if [ -d $outputDir ]; then
+	chmod -R 777 $outputDir; rm -rf $outputDir 
+fi
 mkdir -p $enrollDir
 
 root=$(pwd)

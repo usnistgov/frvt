@@ -133,7 +133,8 @@ enroll(shared_ptr<IdentInterface> &implPtr,
 int
 finalize(shared_ptr<IdentInterface> &implPtr,
     const string &edbDir,
-    const string &enrollDir)
+    const string &enrollDir,
+    const string &configDir)
 {
     string edb{edbDir+"/edb"}, manifest{edbDir+"/manifest"};
     /* Check file existence of edb and manifest */
@@ -143,7 +144,7 @@ finalize(shared_ptr<IdentInterface> &implPtr,
         return FAILURE;
     }
 
-    auto ret = implPtr->finalizeEnrollment(enrollDir, edb, manifest, GalleryType::Unconsolidated);
+    auto ret = implPtr->finalizeEnrollment(configDir, enrollDir, edb, manifest, GalleryType::Unconsolidated);
     if (ret.code != ReturnCode::Success) {
         cerr << "finalizeEnrollment() returned error code: "
                 << to_string(ret.code) << "." << endl;
@@ -328,7 +329,7 @@ initialize(
     const string &enrollDir,
     Action action)
 {
-    if (action == Action::Enroll_1N || action == Action::Finalize_1N) {
+    if (action == Action::Enroll_1N) {
         /* Initialization */
         auto ret = implPtr->initializeTemplateCreation(configDir, TemplateRole::Enrollment_1N);
         if (ret.code != ReturnCode::Success) {
@@ -468,12 +469,7 @@ main(int argc, char* argv[])
             }
         }
     } else if (action == Action::Finalize_1N) {
-        /* Invoke initialization to support implementations
-         * that need access to the configuration directory during finalization */
-        if (initialize(implPtr, configDir, enrollDir, action) != EXIT_SUCCESS)
-            return EXIT_FAILURE;
-
-        return finalize(implPtr, outputDir, enrollDir);
+        return finalize(implPtr, outputDir, enrollDir, configDir);
     } else if (action == Action::InsertAndDelete) {
         /* Initialization */
         if (initialize(implPtr, configDir, enrollDir, action) != EXIT_SUCCESS)
