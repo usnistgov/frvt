@@ -105,7 +105,7 @@ createTemplate(
                 << (eyes.size() > 0 ? eyes[0].yleft : 0) << " "
                 << (eyes.size() > 0 ? eyes[0].xright : 0) << " "
                 << (eyes.size() > 0 ? eyes[0].yright : 0) << " "
-                << quality[0]
+                << (quality.size() > 0 ? quality[0] : -1)
                 << endl;
     }
     inputStream.close();
