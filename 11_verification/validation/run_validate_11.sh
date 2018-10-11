@@ -16,8 +16,8 @@ done
 echo "[SUCCESS]"
 # Download and process validation images
 # Check if the images have already been downloaded first
-numImages=$(ls images/*.ppm | wc -l)
-if [ "$numImages" -ne "1316" ]; then
+numImages=$(ls images/*.p[pg]m | wc -l)
+if [ $numImages -ne 1316 ]; then
 	scripts/get_images.sh
 	retcode=$?
 	if [ $retcode -ne 0 ]; then
