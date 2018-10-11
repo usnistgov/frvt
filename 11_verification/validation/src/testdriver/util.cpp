@@ -79,7 +79,7 @@ readImage(
     /* Read in magic number. */
     string magicNumber;
     input >> magicNumber;
-    if (magicNumber != "P6") {
+    if (magicNumber != "P6" && magicNumber != "P5") {
         cerr << "Error reading magic number from file." << endl;
         return false;
     }
@@ -91,7 +91,11 @@ readImage(
         cerr << "Error, premature end of file while reading header." << endl;
         return false;
     }
-    image.depth = 24;
+
+    if (magicNumber == "P5")
+        image.depth = 8;
+    else if (magicNumber == "P6")
+        image.depth = 24;
 
     /* Skip line break. */
     input.ignore(numeric_limits<streamsize>::max(), '\n');

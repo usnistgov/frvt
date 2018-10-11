@@ -55,9 +55,9 @@ if [[ $retcode != 0 ]]; then
 fi
 echo " [SUCCESS]"
 
-numImages=$(ls $image_dir/*.ppm | wc -l)
-if [ "$numImages" -lt "1308" ]; then
-	echo "The directory $image_dir doesn't have the expected 1308 ppm files.  Please re-run this script"
+numImages=$(ls $image_dir/*.p[pg]m | wc -l)
+if [ $numImages -lt 1316 ]; then
+	echo "The directory $image_dir doesn't have the expected 1316 files.  Please re-run this script"
 	exit $failure
 fi
 ########################################

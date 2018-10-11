@@ -653,7 +653,7 @@
 1305 images/S518-02-t10_01.ppm MUGSHOT
 1307 images/white.ppm UNKNOWN
 1308 images/black.ppm UNKNOWN
-1309 images/8bit.ppm UNKNOWN
+1309 images/8bit.pgm UNKNOWN
 1310 images/big.ppm PHOTOJOURNALISM
 1311 images/eyesClosed.ppm PHOTOJOURNALISM
 1312 images/multi1.ppm PHOTOJOURNALISM

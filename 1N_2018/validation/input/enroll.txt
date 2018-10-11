@@ -652,7 +652,7 @@
 1303 images/S518-01-t10_01.ppm UNKNOWN
 1305 images/S518-02-t10_01.ppm UNKNOWN
 1307 images/white.ppm UNKNOWN
-1309 images/8bit.ppm UNKNOWN
+1309 images/8bit.pgm UNKNOWN
 1310 images/big.ppm UNKNOWN
 1311 images/eyesClosed.ppm UNKNOWN
 1312 images/multi1.ppm UNKNOWN
