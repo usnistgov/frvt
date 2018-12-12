@@ -66,12 +66,12 @@ detectMorph(
     string line;
     ReturnStatus ret;
     if (action == Action::DetectNonScannedMorph ||
-    action == Action::DetectScannedMorph ||
-    action == Action::DetectUnknownMorph) {
+    	action == Action::DetectScannedMorph ||
+    	action == Action::DetectUnknownMorph) {
         logStream << "image isMorph score returnCode" << endl;
     } else if (action == Action::DetectNonScannedMorphWithProbeImg ||
-    action == Action::DetectScannedMorphWithProbeImg ||
-    action == Action::DetectUnknownMorphWithProbeImg) {
+    	action == Action::DetectScannedMorphWithProbeImg ||
+    	action == Action::DetectUnknownMorphWithProbeImg) {
         logStream << "image probeImage isMorph score returnCode" << endl;
     }
 
