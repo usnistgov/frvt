@@ -15,9 +15,58 @@
 #include <string>
 #include <vector>
 
-#include "frvt_structs.h"
+#include <frvt_structs.h>
 
-namespace FRVT {
+namespace FRVT_1N {
+
+/** Labels describing the composition of the 1:N gallery
+ *  (provided as input into gallery finalization function)
+ */
+enum class GalleryType {
+    /** Consolidated, subject-based */
+    Consolidated,
+    /** Unconsolidated, event-based */
+    Unconsolidated
+};
+
+/**
+ * @brief
+ * Data structure for result of an identification search
+ */
+typedef struct Candidate {
+    /** @brief If the candidate is valid, this should be set to true. If
+     * the candidate computation failed, this should be set to false.
+     * If value is set to false, similarityScore and templateId
+     * will be ignored entirely. */
+    bool isAssigned;
+
+    /** @brief The template ID from the enrollment database manifest */
+    std::string templateId;
+
+    /** @brief Measure of similarity between the identification template
+     * and the enrolled candidate.  Higher scores mean more likelihood that
+     * the samples are of the same person.  An algorithm is free to assign
+     * any value to a candidate.
+     * The distribution of values will have an impact on the appearance of a
+     * plot of false-negative and false-positive identification rates. */
+    double similarityScore;
+
+    Candidate() :
+        isAssigned{false},
+        templateId{""},
+        similarityScore{0.0}
+        {}
+
+    Candidate(
+        bool isAssigned,
+        std::string templateId,
+        double similarityScore) :
+        isAssigned{isAssigned},
+        templateId{templateId},
+        similarityScore{similarityScore}
+        {}
+} Candidate;
+
 /**
  * @brief
  * The interface to FRVT 1:N implementation

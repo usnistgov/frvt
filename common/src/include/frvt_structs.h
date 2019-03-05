@@ -27,22 +27,22 @@ typedef struct Image {
     /** Labels describing the type of image */
     enum class Label {
         /** Unknown or unassigned. */
-        UNKNOWN = 0,
+        Unknown = 0,
         /** Frontal, ISO/IEC 19794-5:2005 compliant. */
-        ISO,
+        Iso,
         /** From law enforcement booking processes. Nominally frontal. */
-        MUGSHOT,
+        Mugshot,
         /** The image might appear in a news source or magazine.
          * The images are typically well exposed and focused but
          * exhibit pose and illumination variations. */
-        PHOTOJOURNALISM,
+        Photojournalism,
         /** The image is taken from a child exploitation database.
          * This imagery has highly unconstrained pose and illumination */
-        EXPLOITATION,
+        Exploitation,
         /** Unconstrained image, taken by an amateur photographer, exhibiting
          * wide variations in pose, illumination, and resolution.
          */
-        WILD
+        Wild
     };
 
     /** Number of pixels horizontally */
@@ -108,16 +108,6 @@ enum class TemplateRole {
     Search_1N
 };
 
-/** Labels describing the composition of the gallery
- *  (provided as input into gallery finalization function)
- */
-enum class GalleryType {
-    /** Consolidated, subject-based */
-    Consolidated,
-    /** Unconsolidated, event-based */
-    Unconsolidated
-};
-
 /**
  * @brief
  * Return codes for functions specified in this API
@@ -153,6 +143,8 @@ enum class ReturnCode {
     InputLocationError,
     /** Memory allocation failed (e.g. out of memory) */
     MemoryError,
+	/** Error occurred during the 1:1 match operation */
+    MatchError,
     /** Function is not implemented */
     NotImplemented,
     /** Vendor-defined failure */
@@ -194,6 +186,8 @@ operator<<(
                 "seem incorrect");
     case ReturnCode::MemoryError:
         return (s << "Memory allocation failed (e.g. out of memory)");
+	case ReturnCode::MatchError:
+        return (s << "Error occurred during the 1:1 match operation");
     case ReturnCode::NotImplemented:
         return (s << "Function is not implemented");
     case ReturnCode::VendorError:
@@ -287,43 +281,6 @@ typedef struct EyePair
         {}
 } EyePair;
 
-/**
- * @brief
- * Data structure for result of an identification search
- */
-typedef struct Candidate {
-    /** @brief If the candidate is valid, this should be set to true. If
-     * the candidate computation failed, this should be set to false.
-     * If value is set to false, similarityScore and templateId
-     * will be ignored entirely. */
-    bool isAssigned;
-
-    /** @brief The template ID from the enrollment database manifest */
-    std::string templateId;
-
-    /** @brief Measure of similarity between the identification template
-     * and the enrolled candidate.  Higher scores mean more likelihood that
-     * the samples are of the same person.  An algorithm is free to assign
-     * any value to a candidate.
-     * The distribution of values will have an impact on the appearance of a
-     * plot of false-negative and false-positive identification rates. */
-    double similarityScore;
-
-    Candidate() :
-        isAssigned{false},
-        templateId{""},
-        similarityScore{0.0}
-        {}
-
-    Candidate(
-        bool isAssigned,
-        std::string templateId,
-        double similarityScore) :
-        isAssigned{isAssigned},
-        templateId{templateId},
-        similarityScore{similarityScore}
-        {}
-} Candidate;
 
 /**
  * @brief
