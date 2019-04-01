@@ -1,5 +1,0 @@
-4 images/S001-04-t10_01.ppm UNKNOWN
-2 images/S001-02-t10_01.ppm UNKNOWN
-6 images/S001-06-t10_01.ppm UNKNOWN
-8 images/S001-08-t10_01.ppm UNKNOWN
-10 images/S001-08-t10_03.ppm UNKNOWN

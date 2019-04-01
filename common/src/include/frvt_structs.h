@@ -358,15 +358,15 @@ enum class ImageLabel {
  */
 #ifdef NIST_EXTERN_FRVT_STRUCTS_VERSION
 /** major version number. */
-extern uint16_t MAJOR_VERSION;
+extern uint16_t FRVT_STRUCTS_MAJOR_VERSION;
 /** minor version number. */
-extern uint16_t MINOR_VERSION;
+extern uint16_t FRVT_STRUCTS_MINOR_VERSION;
 #else /* NIST_EXTERN_FRVT_STRUCTS_VERSION */
 /** major version number. */
-uint16_t MAJOR_VERSION{1};
+uint16_t FRVT_STRUCTS_MAJOR_VERSION{1};
 /** minor version number. */
-uint16_t MINOR_VERSION{0};
-#endif /* NIST_EXTERN_API_VERSION */
+uint16_t FRVT_STRUCTS_MINOR_VERSION{0};
+#endif /* NIST_EXTERN_FRVT_STRUCTS_VERSION */
 }
 
 #endif /* FRVT_STRUCTS_H_ */

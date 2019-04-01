@@ -15,9 +15,9 @@
 #include <string>
 #include <vector>
 
-#include "frvt_structs.h"
+#include <frvt_structs.h>
 
-namespace FRVT {
+namespace FRVT_1N {
 /**
  * @brief
  * The interface to FRVT 1:N implementation
@@ -26,9 +26,9 @@ namespace FRVT {
  * The submission software under test will implement this interface by
  * sub-classing this class and implementing each method therein.
  */
-class IdentInterface {
+class Interface {
 public:
-    virtual ~IdentInterface() {}
+    virtual ~Interface() {}
 
     /**
      * @brief Before images are sent to the template
@@ -48,10 +48,10 @@ public:
      * enrollment template used for gallery enrollment or 1:N identification
      * template used for search.
      */
-    virtual ReturnStatus
+    virtual FRVT::ReturnStatus
     initializeTemplateCreation(
         const std::string &configDir,
-        TemplateRole role) = 0;
+        FRVT::TemplateRole role) = 0;
 
     /**
      * @brief This function takes an input Multiface and outputs a template
@@ -92,12 +92,12 @@ public:
      * (Optional) The function may choose to return the estimated eye centers
      * for the input face images.
      */
-    virtual ReturnStatus
+    virtual FRVT::ReturnStatus
     createTemplate(
-        const Multiface &faces,
-        TemplateRole role,
+        const FRVT::Multiface &faces,
+        FRVT::TemplateRole role,
         std::vector<uint8_t> &templ,
-        std::vector<EyePair> &eyeCoordinates) = 0;
+        std::vector<FRVT::EyePair> &eyeCoordinates) = 0;
 
      /**
       * @brief This function will be called after all enrollment templates have
@@ -146,13 +146,13 @@ public:
       * @param[in] galleryType
       * The composition of the gallery as enumerated by GalleryType.
       */
-    virtual ReturnStatus
+    virtual FRVT::ReturnStatus
     finalizeEnrollment(
     	const std::string &configDir,
         const std::string &enrollmentDir,
         const std::string &edbName,
         const std::string &edbManifestName,
-        GalleryType galleryType) = 0;
+        FRVT::GalleryType galleryType) = 0;
 
     /**
      * @brief This function will be called once prior to one or more calls to
@@ -169,7 +169,7 @@ public:
      * @param[in] enrollmentDir
      * The read-only top-level directory in which enrollment data was placed.
      */
-    virtual ReturnStatus
+    virtual FRVT::ReturnStatus
     initializeIdentification(
         const std::string &configDir,
         const std::string &enrollmentDir) = 0;
@@ -200,11 +200,11 @@ public:
      * If there was a mate found, this value should be set to true, Otherwise, false.
      * Many such decisions allow a single point to be plotted alongside a DET curve.
      */
-    virtual ReturnStatus
+    virtual FRVT::ReturnStatus
     identifyTemplate(
         const std::vector<uint8_t> &idTemplate,
         const uint32_t candidateListLength,
-        std::vector<Candidate> &candidateList,
+        std::vector<FRVT::Candidate> &candidateList,
         bool &decision) = 0;
 
     /**
@@ -223,44 +223,43 @@ public:
      * @param[in] id
      * An identifier associated with the enrollment template
      */
-    virtual ReturnStatus
+    virtual FRVT::ReturnStatus
     galleryInsertID(
         const std::vector<uint8_t> &templ,
         const std::string &id) = 0;
 
-
-    /**
-     * @brief This function deletes an existing template with an associated id
-     * from a finalized gallery.
-     *
-     * @details Invocation of this function will always be preceded by
-     * a call to initializeIdentification(), which will provide the location
-     * of the finalized gallery.  One or more calls to
-     * identifyTemplate may be made after calling this function.
-     *
-     * This function will be called from a single process/thread.
-     *
-     * @param[in] id
-     * The identifier of the template to be removed from the gallery
-     */
-    virtual ReturnStatus
-    galleryDeleteID(
-        const std::string &id) = 0;
-
     /**
      * @brief
-     * Factory method to return a managed pointer to the IdentInterface object.
+     * Factory method to return a managed pointer to the Interface object.
      * @details
      * This function is implemented by the submitted library and must return
-     * a managed pointer to the IdentInterface object.
+     * a managed pointer to the Interface object.
      *
      * @note
      * A possible implementation might be:
      * return (std::make_shared<Implementation>());
      */
-    static std::shared_ptr<IdentInterface>
+    static std::shared_ptr<Interface>
     getImplementation();
 };
+
+/*
+ * API versioning
+ *
+ * NIST code will extern the version number symbols.
+ * Participant shall compile them into their core library.
+ */
+#ifdef NIST_EXTERN_API_VERSION
+/** API major version number. */
+extern uint16_t API_MAJOR_VERSION;
+/** API minor version number. */
+extern uint16_t API_MINOR_VERSION;
+#else /* NIST_EXTERN_API_VERSION */
+/** API major version number. */
+uint16_t API_MAJOR_VERSION{1};
+/** API minor version number. */
+uint16_t API_MINOR_VERSION{0};
+#endif /* NIST_EXTERN_API_VERSION */
 }
 
 #endif /* FRVT1N_H_ */
