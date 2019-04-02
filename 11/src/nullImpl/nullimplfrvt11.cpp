@@ -34,12 +34,12 @@ NullImplFRVT11::createTemplate(
         std::vector<uint8_t> &templ,
         std::vector<EyePair> &eyeCoordinates)
 {
-	/* Note: example code, potentially not portable across machines. */
-	std::vector<float> fv = {1.0, 2.0, 8.88, 765.88989};
-	const uint8_t* bytes = reinterpret_cast<const uint8_t*>(fv.data());
-	int dataSize = sizeof(float) * fv.size();
-	templ.resize(dataSize);
-	memcpy(templ.data(), bytes, dataSize);
+    /* Note: example code, potentially not portable across machines. */
+    std::vector<float> fv = {1.0, 2.0, 8.88, 765.88989};
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>(fv.data());
+    int dataSize = sizeof(float) * fv.size();
+    templ.resize(dataSize);
+    memcpy(templ.data(), bytes, dataSize);
 
     for (unsigned int i=0; i<faces.size(); i++) {
         eyeCoordinates.push_back(EyePair(true, true, i, i, i+1, i+1));
@@ -54,13 +54,13 @@ NullImplFRVT11::matchTemplates(
         const std::vector<uint8_t> &enrollTemplate,
         double &similarity)
 {
-	/*
-	float *featureVector = (float *)enrollTemplate.data();
+    /*
+    float *featureVector = (float *)enrollTemplate.data();
 
-	for (unsigned int i=0; i<this->featureVectorSize; i++) {
-		std::cout << featureVector[i] << std::endl;
-	}
-	*/
+    for (unsigned int i=0; i<this->featureVectorSize; i++) {
+	std::cout << featureVector[i] << std::endl;
+    }
+    */
 
     similarity = rand() % 1000 + 1;
     return ReturnStatus(ReturnCode::Success);
