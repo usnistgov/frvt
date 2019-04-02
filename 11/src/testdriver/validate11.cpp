@@ -231,7 +231,7 @@ main(
         outputFileStem{"stem"},
         inputFile,
         templatesDir,
-		roleStr{""};
+	roleStr{""};
     int numForks = 1;
 
     for (int i = 0; i < argc - requiredArgs; i++) {
@@ -248,7 +248,7 @@ main(
         else if (strcmp(argv[requiredArgs+i],"-t") == 0)
             numForks = atoi(argv[requiredArgs+(++i)]);
         else if (strcmp(argv[requiredArgs+i],"-x") == 0)
-        	roleStr = argv[requiredArgs+(++i)];
+	    roleStr = argv[requiredArgs+(++i)];
         else {
             cerr << "[ERROR] Unrecognized flag: " << argv[requiredArgs+i] << endl;;
             usage(argv[0]);
