@@ -204,9 +204,9 @@ main(
 		cerr << "[ERROR] You've compiled your library with an old version of the frvt_structs.h file: version " <<
 		    FRVT::FRVT_STRUCTS_MAJOR_VERSION << "." <<
 		    FRVT::FRVT_STRUCTS_MINOR_VERSION <<
-			".  Please re-build with the latest version: " <<
-			currStructsMajorVersion << "." <<
-			currStructsMinorVersion << "." << endl;
+		    ".  Please re-build with the latest version: " <<
+		    currStructsMajorVersion << "." <<
+	   	    currStructsMinorVersion << "." << endl;
 		return (FAILURE);
 	}
 
@@ -215,9 +215,9 @@ main(
 		std::cerr << "[ERROR] You've compiled your library with an old version of the API header file: " <<
 		    FRVT_11::API_MAJOR_VERSION << "." <<
 		    FRVT_11::API_MINOR_VERSION <<
-			".  Please re-build with the latest version:" <<
-			currAPIMajorVersion << "." <<
-			currStructsMinorVersion << "." << endl;
+		    ".  Please re-build with the latest version:" <<
+		    currAPIMajorVersion << "." <<
+		    currStructsMinorVersion << "." << endl;
 		return (FAILURE);
 	}
 
