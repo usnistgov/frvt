@@ -164,15 +164,15 @@ split(
 
 std::map<std::string, Action> mapStringToAction =
 {
-	/* 1:1 */
-	{ "createTemplate", Action::CreateTemplate },
-	{ "match", Action::Match },
-	/* 1:N */
-	{ "enroll_1N", Action::Enroll_1N },
-	{ "finalize_1N", Action::Finalize_1N },
-	{ "search_1N", Action::Search_1N },
-	{ "insert", Action::Insert },
-	/* MORPH */
+    /* 1:1 */
+    { "createTemplate", Action::CreateTemplate },
+    { "match", Action::Match },
+    /* 1:N */
+    { "enroll_1N", Action::Enroll_1N },
+    { "finalize_1N", Action::Finalize_1N },
+    { "search_1N", Action::Search_1N },
+    { "insert", Action::Insert },
+    /* MORPH */
     { "detectNonScannedMorph", Action::DetectNonScannedMorph },
     { "detectScannedMorph", Action::DetectScannedMorph },
     { "detectUnknownMorph", Action::DetectUnknownMorph },
@@ -180,25 +180,25 @@ std::map<std::string, Action> mapStringToAction =
     { "detectScannedMorphWithProbeImg", Action::DetectScannedMorphWithProbeImg },
     { "detectUnknownMorphWithProbeImg", Action::DetectUnknownMorphWithProbeImg },
     { "compare", Action::Compare },
-	/* QUALITY */
-	{ "scalarQ", Action::ScalarQ },
-	{ "scalarQWithReference", Action::ScalarQWithReference },
-	{ "scalarImageQ", Action::ScalarImageQ },
-	{ "scalarSubjectQ", Action::ScalarSubjectQ },
-	{ "vectorQ", Action::VectorQ },
+    /* QUALITY */
+    { "scalarQ", Action::ScalarQ },
+    { "scalarQWithReference", Action::ScalarQWithReference },
+    { "scalarImageQ", Action::ScalarImageQ },
+    { "scalarSubjectQ", Action::ScalarSubjectQ },
+    { "vectorQ", Action::VectorQ },
 };
 
 std::map<Action, std::string> mapActionToString =
 {
-	/* 1:1 */
-	{ Action::CreateTemplate, "createTemplate" },
-	{ Action::Match, "match" },
-	/* 1:N */
-	{ Action::Enroll_1N, "enroll_1N" },
-	{ Action::Finalize_1N, "finalize_1N" },
-	{ Action::Search_1N, "search_1N" },
-	{ Action::Insert, "insert" },
-	/* MORPH */
+    /* 1:1 */
+    { Action::CreateTemplate, "createTemplate" },
+    { Action::Match, "match" },
+    /* 1:N */
+    { Action::Enroll_1N, "enroll_1N" },
+    { Action::Finalize_1N, "finalize_1N" },
+    { Action::Search_1N, "search_1N" },
+    { Action::Insert, "insert" },
+    /* MORPH */
     { Action::DetectNonScannedMorph, "detectNonScannedMorph" },
     { Action::DetectScannedMorph, "detectScannedMorph" },
     { Action::DetectUnknownMorph, "detectUnknownMorph" },
@@ -206,51 +206,51 @@ std::map<Action, std::string> mapActionToString =
     { Action::DetectScannedMorphWithProbeImg, "detectScannedMorphWithProbeImg" },
     { Action::DetectUnknownMorphWithProbeImg, "detectUnknownMorphWithProbeImg" },
     { Action::Compare, "compare" },
-	/* QUALITY */
-	{ Action::ScalarQ, "scalarQ" },
-	{ Action::ScalarQWithReference, "scalarQWithReference" },
-	{ Action::ScalarImageQ, "scalarImageQ" },
-	{ Action::ScalarSubjectQ, "scalarSubjectQ" },
-	{ Action::VectorQ, "vectorQ" },
+    /* QUALITY */
+    { Action::ScalarQ, "scalarQ" },
+    { Action::ScalarQWithReference, "scalarQWithReference" },
+    { Action::ScalarImageQ, "scalarImageQ" },
+    { Action::ScalarSubjectQ, "scalarSubjectQ" },
+    { Action::VectorQ, "vectorQ" },
 };
 
 std::map<Action, FRVT::ImageLabel> mapActionToMorphLabel =
 {
-	{ Action::DetectNonScannedMorph, FRVT::ImageLabel::NonScanned },
-	{ Action::DetectScannedMorph, FRVT::ImageLabel::Scanned },
-	{ Action::DetectUnknownMorph, FRVT::ImageLabel::Unknown },
-	{ Action::DetectNonScannedMorphWithProbeImg, FRVT::ImageLabel::NonScanned },
-	{ Action::DetectScannedMorphWithProbeImg, FRVT::ImageLabel::Scanned },
-	{ Action::DetectUnknownMorphWithProbeImg, FRVT::ImageLabel::Unknown }
+    { Action::DetectNonScannedMorph, FRVT::ImageLabel::NonScanned },
+    { Action::DetectScannedMorph, FRVT::ImageLabel::Scanned },
+    { Action::DetectUnknownMorph, FRVT::ImageLabel::Unknown },
+    { Action::DetectNonScannedMorphWithProbeImg, FRVT::ImageLabel::NonScanned },
+    { Action::DetectScannedMorphWithProbeImg, FRVT::ImageLabel::Scanned },
+    { Action::DetectUnknownMorphWithProbeImg, FRVT::ImageLabel::Unknown }
 };
 
 std::map<std::string, FRVT::Image::Label> mapStringToImgLabel =
 {
-	{ "UNKNOWN", FRVT::Image::Label::Unknown },
-	{ "ISO", FRVT::Image::Label::Iso },
-	{ "MUGSHOT", FRVT::Image::Label::Mugshot },
-	{ "PHOTOJOURNALISM", FRVT::Image::Label::Photojournalism },
-	{ "EXPLOITATION", FRVT::Image::Label::Exploitation },
-	{ "WILD", FRVT::Image::Label::Wild }
+    { "UNKNOWN", FRVT::Image::Label::Unknown },
+    { "ISO", FRVT::Image::Label::Iso },
+    { "MUGSHOT", FRVT::Image::Label::Mugshot },
+    { "PHOTOJOURNALISM", FRVT::Image::Label::Photojournalism },
+    { "EXPLOITATION", FRVT::Image::Label::Exploitation },
+    { "WILD", FRVT::Image::Label::Wild }
 };
 
 std::map<FRVT::ReturnCode, std::string> mapRetCodeToString =
 {
-	{ FRVT::ReturnCode::Success, "Success" },
-	{ FRVT::ReturnCode::UnknownError, "UnknownError" },
-	{ FRVT::ReturnCode::ConfigError, "ConfigError" },
-	{ FRVT::ReturnCode::RefuseInput, "RefuseInput" },
-	{ FRVT::ReturnCode::ExtractError, "ExtractError" },
-	{ FRVT::ReturnCode::ParseError, "ParseError" },
-	{ FRVT::ReturnCode::TemplateCreationError, "TemplateCreationError" },
-	{ FRVT::ReturnCode::VerifTemplateError, "VerifTemplateError" },
-	{ FRVT::ReturnCode::FaceDetectionError, "FaceDetectionError" },
-	{ FRVT::ReturnCode::NumDataError, "NumDataError" },
-	{ FRVT::ReturnCode::TemplateFormatError, "TemplateFormatError" },
-	{ FRVT::ReturnCode::EnrollDirError, "EnrollDirError" },
-	{ FRVT::ReturnCode::InputLocationError, "InputLocationError" },
-	{ FRVT::ReturnCode::MemoryError, "MemoryError" },
-	{ FRVT::ReturnCode::MatchError, "MatchError" },
-	{ FRVT::ReturnCode::NotImplemented, "NotImplemented" },
-	{ FRVT::ReturnCode::VendorError, "VendorError" },
+    { FRVT::ReturnCode::Success, "Success" },
+    { FRVT::ReturnCode::UnknownError, "UnknownError" },
+    { FRVT::ReturnCode::ConfigError, "ConfigError" },
+    { FRVT::ReturnCode::RefuseInput, "RefuseInput" },
+    { FRVT::ReturnCode::ExtractError, "ExtractError" },
+    { FRVT::ReturnCode::ParseError, "ParseError" },
+    { FRVT::ReturnCode::TemplateCreationError, "TemplateCreationError" },
+    { FRVT::ReturnCode::VerifTemplateError, "VerifTemplateError" },
+    { FRVT::ReturnCode::FaceDetectionError, "FaceDetectionError" },
+    { FRVT::ReturnCode::NumDataError, "NumDataError" },
+    { FRVT::ReturnCode::TemplateFormatError, "TemplateFormatError" },
+    { FRVT::ReturnCode::EnrollDirError, "EnrollDirError" },
+    { FRVT::ReturnCode::InputLocationError, "InputLocationError" },
+    { FRVT::ReturnCode::MemoryError, "MemoryError" },
+    { FRVT::ReturnCode::MatchError, "MatchError" },
+    { FRVT::ReturnCode::NotImplemented, "NotImplemented" },
+    { FRVT::ReturnCode::VendorError, "VendorError" },
 };
