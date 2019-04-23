@@ -13,7 +13,7 @@ http://nigos.nist.gov:8080/evaluations/CentOS-7-x86_64-Everything-1810.iso.
 ===============================
 Validation Dataset
 ===============================
-The ./images directory will contain all of the images necessary for validation.
+The ../common/images directory will contain all of the images necessary for validation.
 
 NOTE: The validation images are used for the sole purpose of validation and stress-testing
 your software.  The images are not necessarily representative of actual test data that will 
