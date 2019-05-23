@@ -13,6 +13,18 @@ if [ "$reqOS" != "$currentOS" ]; then
 	exit $failure
 fi
  
+# Install the necessary packages to run validation
+echo -n "Checking installation of required packages "
+for package in coreutils gawk gcc gcc-c++ grep cmake sed
+do
+	yum -q list installed $package &> /dev/null
+	retcode=$?
+	if [[ $retcode != 0 ]]; then
+		sudo yum install -y $package
+	fi	
+done
+echo "[SUCCESS]"
+
 # Compile and build implementation library against
 # validation test driver
 scripts/compile_and_link.sh
