@@ -15,7 +15,7 @@ fi
 
 # Install the necessary packages to run validation
 echo -n "Checking installation of required packages "
-for package in coreutils gawk gcc gcc-c++ grep cmake sed
+for package in coreutils gawk gcc gcc-c++ grep cmake sed bc 
 do
 	yum -q list installed $package &> /dev/null
 	retcode=$?
