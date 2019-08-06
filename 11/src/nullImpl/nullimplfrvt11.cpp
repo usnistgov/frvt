@@ -38,7 +38,7 @@ NullImplFRVT11::createTemplate(
     std::vector<float> fv = {1.0, 2.0, 8.88, 765.88989};
     const uint8_t* bytes = reinterpret_cast<const uint8_t*>(fv.data());
     int dataSize = sizeof(float) * fv.size();
-    templ.resize(dataSize);
+    templ.resize(dataSize / sizeof(uint8_t));
     memcpy(templ.data(), bytes, dataSize);
 
     for (unsigned int i=0; i<faces.size(); i++) {
