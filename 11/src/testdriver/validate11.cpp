@@ -331,7 +331,7 @@ main(
             pid_t cpid;
 
             cpid = wait(&stat_val);
-            if (WIFEXITED(stat_val)) {}
+            if (WIFEXITED(stat_val)) { exitStatus = WEXITSTATUS(stat_val); }
             else if (WIFSIGNALED(stat_val)) {
                 cerr << "PID " << cpid << " exited due to signal " <<
                         WTERMSIG(stat_val) << endl;
