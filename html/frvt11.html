@@ -4046,24 +4046,181 @@ caption
   color: #00407d;
 }
 </style>
+<head>
+<style type="text/css">
+
+.nist-header {
+background: #000;
+font-family: Helvetica, Arial, sans-serif;
+padding: 10px 16px 0;
+font-size: 16px;
+}
+.nist-header__logo-link {
+display: inline-block;
+height: 35px;
+}
+.nist-header__logo-icon {
+fill: #fff;
+display: inline-block;
+height: 16px;
+position: relative;
+top: -2px;
+margin-right: 2px;
+}
+.nist-header__logo-image {
+fill: #fff;
+display: inline-block;
+height: 24px;
+width: 90px;
+}
+
+.nist-main {
+margin-left: auto;
+margin-right: auto;
+max-width: 1200px;
+padding: 0 16px;
+box-sizing: border-box;
+}
+
+body {
+padding: 0;
+margin: 0;
+}
+
+.nist-footer {
+background: #333333;
+position: relative;
+z-index: 200;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 16px;
+box-sizing: border-box;
+}
+.nist-footer__inner {
+margin-left: auto;
+margin-right: auto;
+max-width: 1200px;
+padding: 0 16px;
+}
+.nist-footer__inner:after {
+content: "";
+display: table;
+clear: both;
+}
+.nist-footer {
+background: #333333;
+color: white;
+padding: 40px 0px;
+position: relative;
+}
+.nist-footer a {
+color: white;
+text-decoration: none;
+}
+.nist-footer .nist-footer__logo img {
+width: 200px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 30px;
+}
+.nist-footer__menu {
+clear: both;
+margin-bottom: 10px;
+}
+.nist-footer__menu.first {
+padding-top: 20px;
+}
+.nist-footer__menu ul {
+margin: 0;
+padding: 0;
+list-style: none;
+text-align: center;
+}
+.nist-footer__menu-item {
+display: inline-block;
+font-size: 14px;
+padding: 0;
+margin-left: 0;
+}
+.nist-footer__menu-item:after {
+content: '|';
+margin-right: 1.6px;
+display: inherit;
+position: static;
+font: inherit;
+line-height: inherit;
+color: inherit;
+}
+.nist-footer__menu-item:last-child:after {
+content: none;
+}
+.nist-footer__menu-item a {
+font-weight: normal;
+margin-right: 6px;
+white-space: nowrap;
+padding: 0.5em 0;
+display: inline-block;
+}
+
+html.nist-footer-bottom, html.nist-footer-bottom body {
+height: 100%;
+}
+html.nist-footer-bottom body {
+display: flex;
+flex-direction: column;
+}
+html.nist-footer-bottom #main {
+flex: 1 0 auto;
+}
+html.nist-footer-bottom .nist-footer {
+flex-shrink: 0;
+}
+</style>
+<script type="text/javascript">/**
+ * @file
+ * Header and footer scripts
+ *
+ */
+
+$(document).ready(function () {
+
+  $("body").prepend('<div id="nistheadergoeshere"></div>');
+  $.ajax({
+    url: "https://pages.nist.gov/nist-header-footer/boilerplate-header.html",
+    cache: false,
+    dataType: "html",
+    success: function (data) { $('#nistheadergoeshere').append(data); },
+  });
+
+  $("body").append('<div id="nistfootergoeshere"></div>');
+  $.ajax({
+    url: "https://pages.nist.gov/nist-header-footer/boilerplate-footer.html",
+    cache: false,
+    dataType: "html",
+    success: function (data) { $('#nistfootergoeshere').append(data); },
+  });
+
+});
+</script>
+</head>
 <div class="watermark">
 DRAFT
 </div>
 <hr />
-<p><font size="4"><a href="https://www.nist.gov/sites/default/files/documents/2019/09/11/frvt_report_2019_09_11.pdf">Latest Report</a> | <a href="https://www.nist.gov/sites/default/files/documents/2016/12/15/frvt_participation_agreement.pdf">Participation Agreement</a> | <a href="https://www.nist.gov/sites/default/files/documents/2019/04/01/frvt_ongoing_11_api_4.0.pdf">API</a> | <a href="https://github.com/usnistgov/frvt">Validation</a> | <a href="https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist">Encryption</a> </font></p>
+<p><font size="4"><a href="https://www.nist.gov/system/files/documents/2019/11/20/frvt_report_2019_11_19_0.pdf">Latest Report</a> | <a href="https://www.nist.gov/system/files/documents/2016/12/15/frvt_participation_agreement.pdf">Participation Agreement</a> | <a href="https://www.nist.gov/system/files/documents/2019/04/01/frvt_ongoing_11_api_4.0.pdf">API</a> | <a href="https://github.com/usnistgov/frvt">Validation</a> | <a href="https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist">Encryption</a> </font></p>
 <div id="frvt-11-leaderboard" class="section level2">
 <h2>FRVT 1:1 Leaderboard</h2>
 <p>[last updated: September 11, 2019]</p>
 <p>The leaderboard has been updated to list the 20 most accurate developers rather than algorithms, choosing the most accurate algorithm from each developer based on visa and mugshot results. Also, the algorithms are ordered in terms of lowest mean rank across mugshot, visa, visa border, and wild datasets, rewarding broad accuracy over a good result on one particular dataset.</p>
 <p>The leaderboard shows the top performing 1:1 algorithms measured on false non-match rate (FNMR) across several different datasets. FNMR is the proportion of mated comparisons below a threshold set to achieve the false match rate (FMR) specified. FMR is the proportion of impostor comparisons at or above that threshold.</p>
-<p><div id="htmlwidget-6e5798bbc08fe4475113" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6e5798bbc08fe4475113">{"x":{"filter":"none","extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107],["visionlabs-007","deepglint-001","everai-paravision-003","imperial-002","dahua-003","tevian-005","alphaface-001","ntechlab-007","yitu-003","innovatrics-006","facesoft-000","hr-002","intellifusion-001","pixelall-003","anke-004","hik-001","camvi-004","vocord-007","tech5-003","sertis-000","uluface-002","winsense-001","starhybrid-001","einetworks-000","mt-000","sjtu-001","cogent-004","incode-004","cyberlink-003","iqface-000","x-laboratory-000","psl-003","neurotechnology-006","rokid-000","remarkai-001","intellicloudai-001","3divi-004","saffe-002","deepsea-001","kedacom-000","ulsee-001","idemia-005","synesis-006","tongyi-005","ceiec-002","alchera-000","siat-002","visionbox-001","toshiba-003","lookman-004","itmo-006","intsysmsu-000","cognitec-000","shu-001","samtech-001","rankone-007","meiya-001","via-000","gorilla-003","f8-001","upc-001","nodeflux-002","isystems-002","iit-001","realnetworks-002","intelresearch-000","ctbcbank-000","tiger-003","trueface-000","megvii-002","vigilantsolutions-007","aiunionface-000","dermalog-006","id3-004","vion-000","vd-001","allgovision-000","imagus-000","anyvision-004","intellivision-002","digitalbarriers-002","kneron-003","sensetime-001","aware-004","yisheng-004","veridas-002","smilart-003","adera-001","innovativetechnologyltd-001","shaman-001","kakao-002","dsk-000","glory-001","awiros-001","ayonix-000","microfocus-002","isap-001","notiontag-000","cyberextruder-002","amplifiedgroup-001","tuputech-000","videonetics-001","bm-001","chtface-001","null-000","isityou-000","vcog-002"],["0.005","0.006","0.005","0.008","0.007","0.006","0.010","0.008","0.003","0.009","0.011","0.006","0.009","0.012","0.015","0.012","0.032","0.005","0.007","0.021","0.012","0.010","0.014","0.018","0.017","0.008","0.012","0.013","0.019","0.014","0.011","0.010","0.014","0.014","0.026","0.023","0.015","0.021","0.021","0.008","0.025","0.022","0.010","0.015","0.019","0.024","0.013","0.027","0.021","0.010","0.022","0.020","0.018","0.014","0.036","0.037","0.027","0.037","0.029","0.034","0.052","0.034","0.018","0.018","0.036","0.058","0.025","0.060","0.432","0.014","0.031","0.015","0.037","0.034","0.059","0.045","0.053","0.088","0.038","0.177","0.369","0.090","0.009","0.095","0.333","0.226","0.884","0.176","_","0.462","0.178","0.217","0.108","0.462","0.487","0.506","0.659","0.788","0.134","0.585","0.370","0.645","_","0.999","_","0.703","0.903"],["0.001","0.001","0.001","0.003","0.002","0.002","0.002","0.002","0.000","0.002","0.003","0.002","0.003","0.003","0.003","0.004","0.005","0.001","0.001","0.005","0.003","0.002","0.006","0.005","0.005","0.002","0.002","0.003","0.004","0.004","0.003","0.003","0.004","0.004","0.006","0.006","0.005","0.005","0.007","0.003","0.008","0.006","0.002","0.002","0.012","0.009","0.004","0.007","0.005","0.004","0.005","0.007","0.004","0.004","0.007","0.006","0.007","0.009","0.005","0.018","0.007","0.007","0.007","0.005","0.010","0.009","0.006","0.009","0.007","0.004","0.007","0.005","0.017","0.008","0.029","0.009","0.021","0.033","0.008","0.027","0.097","0.022","0.003","0.026","0.048","0.053","0.109","0.037","_","0.136","0.017","0.076","0.041","0.288","0.230","0.157","0.234","0.322","0.027","0.300","0.278","0.306","0.619","0.999","_","0.414","0.504"],["0.004","0.005","0.004","0.005","0.006","0.006","0.004","0.007","0.007","0.006","0.006","0.005","0.006","0.006","0.007","0.009","0.004","0.006","0.010","0.008","0.007","0.009","0.008","0.009","0.007","0.021","0.010","0.010","0.010","0.007","0.012","0.005","0.011","0.007","0.010","0.009","0.010","0.011","0.014","0.011","0.011","0.012","0.011","0.019","0.012","0.012","0.011","0.011","0.009","0.012","0.015","0.011","0.012","0.029","0.015","0.011","0.016","0.018","0.021","0.018","0.029","0.026","0.011","0.010","0.051","0.039","0.015","0.019","0.012","0.022","0.014","_","0.017","0.024","0.042","0.027","0.023","0.050","0.026","0.061","0.088","0.035","_","0.084","0.115","0.262","0.070","0.182","0.050","0.237","0.079","0.379","0.164","0.553","0.615","0.578","0.690","0.371","0.146","0.697","_","0.752","0.959","1.000","1.000","1.000","_"],["0.005","0.007","0.005","0.009","0.007","0.008","0.007","0.013","0.008","0.010","0.011","0.008","0.009","0.008","0.011","0.016","0.005","0.009","0.018","0.012","0.009","0.019","0.011","0.014","0.011","0.043","0.013","0.016","0.015","0.011","0.013","0.007","0.018","0.010","0.016","0.014","0.013","0.017","0.021","0.011","0.018","0.021","0.017","0.040","0.016","0.018","0.019","0.016","0.013","0.014","0.026","0.015","0.016","0.066","0.022","0.017","0.025","0.029","0.042","0.022","0.047","0.044","0.016","0.014","0.108","0.075","0.022","0.034","0.017","0.036","0.021","_","0.026","0.041","0.046","0.038","0.032","0.087","0.048","0.098","0.154","0.055","_","0.139","0.183","0.415","0.116","0.290","0.094","0.369","0.135","0.537","0.201","0.649","0.753","0.721","0.796","0.494","0.224","0.829","_","0.859","0.985","_","0.999","_","_"],["0.006","0.007","0.009","0.008","0.011","0.007","0.008","0.008","0.006","0.010","0.009","0.008","0.011","0.012","0.010","0.011","0.010","0.052","0.009","0.011","0.011","0.009","0.015","0.013","0.013","0.013","0.016","0.017","0.015","0.017","0.042","1.000","0.016","0.016","0.016","0.016","0.018","0.024","0.016","0.042","0.019","0.021","_","0.016","0.027","0.020","0.028","0.019","_","0.043","0.023","0.015","0.028","0.017","0.024","0.029","0.031","0.030","0.030","0.030","0.029","0.055","_","0.122","0.037","0.041","0.021","0.034","0.030","_","0.036","_","_","0.029","0.058","0.042","_","0.085","_","0.080","0.097","0.092","_","0.117","0.204","0.207","0.089","0.171","_","0.357","0.064","0.312","_","0.201","0.656","_","0.720","0.857","_","0.781","0.324","0.866","0.905","1.000","_","_","_"],["0.031","0.030","0.030","0.030","0.031","0.033","0.031","0.031","0.036","0.031","0.030","0.037","0.033","0.032","0.032","0.031","0.032","0.031","0.034","0.032","0.049","0.035","0.039","0.033","0.036","0.033","0.044","0.034","0.034","0.042","0.033","0.033","0.035","0.089","0.035","0.046","0.071","0.035","0.039","0.253","0.036","0.035","0.032","0.052","0.049","0.041","0.057","0.045","0.032","0.254","0.037","0.703","0.104","0.101","0.041","0.053","0.043","0.043","0.043","0.052","0.037","0.035","0.056","0.486","0.041","0.041","1.000","0.054","0.081","0.073","1.000","0.035","0.067","_","0.252","0.608","0.070","0.137","0.053","0.098","0.057","0.310","1.000","0.147","0.116","0.082","0.138","0.268","0.057","0.183","1.000","0.333","0.475","0.583","0.465","0.254","0.353","0.371","1.000","0.556","0.955","0.480","0.993","0.998","_","1.000","_"],["0.371","0.401","0.267","_","_","_","_","0.332","_","_","0.499","_","_","_","0.358","_","_","0.847","_","_","0.673","_","0.558","_","0.377","_","0.718","0.510","_","0.649","_","_","0.591","_","_","_","_","_","0.561","0.765","_","_","_","0.620","0.516","_","0.428","_","_","0.766","_","_","0.837","0.459","_","0.669","_","0.764","0.976","0.527","0.422","_","0.488","0.484","_","_","0.880","0.561","_","0.301","_","_","0.585","_","0.876","_","_","0.694","0.463","_","_","0.696","0.700","_","0.715","_","_","0.720","_","0.899","_","0.731","0.883","_","0.843","0.652","_","0.648","0.610","_","_","0.730","0.884","_","_","_","0.752"],["2019_06_13","2019_06_21","2019_07_01","2019_08_28","2019_08_14","2019_09_27","2019_09_03","2019_06_25","2019_03_01","2019_08_13","2019_07_10","2019_10_08","2019_08_22","2019_10_15","2019_06_27","2019_03_01","2019_07_12","2019_06_06","2019_08_19","2019_10_07","2019_07_10","2019_10_16","2019_06_19","2019_08_13","2019_06_03","2019_09_27","2019_06_14","2019_06_12","2019_10_07","2019_06_04","2019_09_03","2019_10_03","2019_06_26","2019_08_01","2019_03_01","2019_08_13","2019_07_22","2019_03_01","2019_06_03","2019_06_03","2019_07_31","2019_10_11","2019_10_10","2019_06_12","2019_06_12","2019_03_01","2018_06_13","2019_03_01","2019_03_01","2019_06_03","2019_03_01","2019_07_22","2018_10_19","2019_07_05","2019_10_15","2019_06_03","2019_03_01","2019_07_08","2019_06_19","2019_07_11","2019_06_27","2019_08_26","2018_10_18","2019_07_05","2019_02_28","2019_07_31","2019_06_28","2018_10_16","2019_10_08","2018_10_19","2019_06_27","2019_10_22","2018_10_18","2019_02_26","2018_10_19","2019_02_26","2019_03_01","2019_06_19","2018_06_15","2019_08_23","2019_03_01","2019_07_01","2018_10_19","2019_03_01","2018_06_12","2019_03_01","2019_03_01","2019_06_17","2019_10_22","2018_01_13","2019_06_19","2019_06_28","2018_06_08","2019_09_27","2017_06_22","2018_10_17","2019_08_07","2019_06_12","2018_01_30","2019_03_01","2019_10_11","2019_06_19","2018_10_17","2019_08_06","2019_05_29","2017_06_26","2017_06_12"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>#<\/th>\n      <th>Developer<\/th>\n      <th>VISA Photos FNMR @ FMR ≤ 0.000001<\/th>\n      <th>VISA Photos FNMR @ FMR ≤ 0.0001<\/th>\n      <th>MUGSHOT Photos FNMR @ FMR ≤ 0.00001<\/th>\n      <th>MUGSHOT Photos FNMR @ FMR ≤ 0.00001 DT=14 YRS<\/th>\n      <th>VISABORDER Photos FNMR@ FMR ≤ 0.000001<\/th>\n      <th>WILD Photos FNMR@ FMR ≤ 0.00001<\/th>\n      <th>CHILD EXP Photos FNMR@ FMR ≤ 0.01<\/th>\n      <th>Submission Date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"lfBrtip","buttons":["csv",{"extend":"pdf","pageSize":"A4","orientation":"landscape","filename":"tt"}],"scrollX":true,"scrollCollapse":true,"initComplete":"function(settings, json) {$(this.api().table().header()).css({'font-size' : '12px'});}","search":{"regex":true,"caseInsensitive":false},"pageLength":20,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[6]; $(this.api().cell(row, 6).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[7]; $(this.api().cell(row, 7).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[8]; $(this.api().cell(row, 8).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[9]; $(this.api().cell(row, 9).node()).css({'text-align':'center','font-size':'80%'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
+<p><div id="htmlwidget-dfbcea6934262e7d1c1f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dfbcea6934262e7d1c1f">{"x":{"filter":"none","extensions":["Buttons"],"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107],["visionlabs-007","deepglint-001","everai-paravision-003","imperial-002","dahua-003","tevian-005","alphaface-001","ntechlab-007","yitu-003","innovatrics-006","facesoft-000","hr-002","intellifusion-001","pixelall-003","anke-004","hik-001","camvi-004","vocord-007","tech5-003","sertis-000","uluface-002","winsense-001","starhybrid-001","einetworks-000","mt-000","sjtu-001","cogent-004","incode-004","cyberlink-003","iqface-000","x-laboratory-000","psl-003","neurotechnology-006","rokid-000","remarkai-001","intellicloudai-001","3divi-004","saffe-002","deepsea-001","kedacom-000","ulsee-001","idemia-005","synesis-006","tongyi-005","ceiec-002","alchera-000","siat-002","visionbox-001","toshiba-003","lookman-004","itmo-006","intsysmsu-000","cognitec-000","shu-001","samtech-001","rankone-007","meiya-001","via-000","gorilla-003","f8-001","upc-001","nodeflux-002","isystems-002","iit-001","realnetworks-002","intelresearch-000","ctbcbank-000","tiger-003","trueface-000","megvii-002","vigilantsolutions-007","aiunionface-000","dermalog-006","id3-004","vion-000","vd-001","allgovision-000","imagus-000","anyvision-004","intellivision-002","digitalbarriers-002","kneron-003","sensetime-001","aware-004","yisheng-004","veridas-002","smilart-003","adera-001","innovativetechnologyltd-001","shaman-001","kakao-002","dsk-000","glory-001","awiros-001","ayonix-000","microfocus-002","isap-001","notiontag-000","cyberextruder-002","amplifiedgroup-001","tuputech-000","videonetics-001","bm-001","chtface-001","null-000","isityou-000","vcog-002"],["0.005","0.006","0.005","0.008","0.007","0.006","0.010","0.008","0.003","0.009","0.011","0.006","0.009","0.012","0.015","0.012","0.032","0.005","0.007","0.021","0.012","0.010","0.014","0.018","0.017","0.008","0.012","0.013","0.019","0.014","0.011","0.010","0.014","0.014","0.026","0.023","0.015","0.021","0.021","0.008","0.025","0.022","0.010","0.015","0.019","0.024","0.013","0.027","0.021","0.010","0.022","0.020","0.018","0.014","0.036","0.037","0.027","0.037","0.029","0.034","0.052","0.034","0.018","0.018","0.036","0.058","0.025","0.060","0.432","0.014","0.031","0.015","0.037","0.034","0.059","0.045","0.053","0.088","0.038","0.177","0.369","0.090","0.009","0.095","0.333","0.226","0.884","0.176","_","0.462","0.178","0.217","0.108","0.462","0.487","0.506","0.659","0.788","0.134","0.585","0.370","0.645","_","0.999","_","0.703","0.903"],["0.001","0.001","0.001","0.003","0.002","0.002","0.002","0.002","0.000","0.002","0.003","0.002","0.003","0.003","0.003","0.004","0.005","0.001","0.001","0.005","0.003","0.002","0.006","0.005","0.005","0.002","0.002","0.003","0.004","0.004","0.003","0.003","0.004","0.004","0.006","0.006","0.005","0.005","0.007","0.003","0.008","0.006","0.002","0.002","0.012","0.009","0.004","0.007","0.005","0.004","0.005","0.007","0.004","0.004","0.007","0.006","0.007","0.009","0.005","0.018","0.007","0.007","0.007","0.005","0.010","0.009","0.006","0.009","0.007","0.004","0.007","0.005","0.017","0.008","0.029","0.009","0.021","0.033","0.008","0.027","0.097","0.022","0.003","0.026","0.048","0.053","0.109","0.037","_","0.136","0.017","0.076","0.041","0.288","0.230","0.157","0.234","0.322","0.027","0.300","0.278","0.306","0.619","0.999","_","0.414","0.504"],["0.004","0.005","0.004","0.005","0.006","0.006","0.004","0.007","0.007","0.006","0.006","0.005","0.006","0.006","0.007","0.009","0.004","0.006","0.010","0.008","0.007","0.009","0.008","0.009","0.007","0.021","0.010","0.010","0.010","0.007","0.012","0.005","0.011","0.007","0.010","0.009","0.010","0.011","0.014","0.011","0.011","0.012","0.011","0.019","0.012","0.012","0.011","0.011","0.009","0.012","0.015","0.011","0.012","0.029","0.015","0.011","0.016","0.018","0.021","0.018","0.029","0.026","0.011","0.010","0.051","0.039","0.015","0.019","0.012","0.022","0.014","_","0.017","0.024","0.042","0.027","0.023","0.050","0.026","0.061","0.088","0.035","_","0.084","0.115","0.262","0.070","0.182","0.050","0.237","0.079","0.379","0.164","0.553","0.615","0.578","0.690","0.371","0.146","0.697","_","0.752","0.959","1.000","1.000","1.000","_"],["0.005","0.007","0.005","0.009","0.007","0.008","0.007","0.013","0.008","0.010","0.011","0.008","0.009","0.008","0.011","0.016","0.005","0.009","0.018","0.012","0.009","0.019","0.011","0.014","0.011","0.043","0.013","0.016","0.015","0.011","0.013","0.007","0.018","0.010","0.016","0.014","0.013","0.017","0.021","0.011","0.018","0.021","0.017","0.040","0.016","0.018","0.019","0.016","0.013","0.014","0.026","0.015","0.016","0.066","0.022","0.017","0.025","0.029","0.042","0.022","0.047","0.044","0.016","0.014","0.108","0.075","0.022","0.034","0.017","0.036","0.021","_","0.026","0.041","0.046","0.038","0.032","0.087","0.048","0.098","0.154","0.055","_","0.139","0.183","0.415","0.116","0.290","0.094","0.369","0.135","0.537","0.201","0.649","0.753","0.721","0.796","0.494","0.224","0.829","_","0.859","0.985","_","0.999","_","_"],["0.006","0.007","0.009","0.008","0.011","0.007","0.008","0.008","0.006","0.010","0.009","0.008","0.011","0.012","0.010","0.011","0.010","0.052","0.009","0.011","0.011","0.009","0.015","0.013","0.013","0.013","0.016","0.017","0.015","0.017","0.042","1.000","0.016","0.016","0.016","0.016","0.018","0.024","0.016","0.042","0.019","0.021","_","0.016","0.027","0.020","0.028","0.019","_","0.043","0.023","0.015","0.028","0.017","0.024","0.029","0.031","0.030","0.030","0.030","0.029","0.055","_","0.122","0.037","0.041","0.021","0.034","0.030","_","0.036","_","_","0.029","0.058","0.042","_","0.085","_","0.080","0.097","0.092","_","0.117","0.204","0.207","0.089","0.171","_","0.357","0.064","0.312","_","0.201","0.656","_","0.720","0.857","_","0.781","0.324","0.866","0.905","1.000","_","_","_"],["0.031","0.030","0.030","0.030","0.031","0.033","0.031","0.031","0.036","0.031","0.030","0.037","0.033","0.032","0.032","0.031","0.032","0.031","0.034","0.032","0.049","0.035","0.039","0.033","0.036","0.033","0.044","0.034","0.034","0.042","0.033","0.033","0.035","0.089","0.035","0.046","0.071","0.035","0.039","0.253","0.036","0.035","0.032","0.052","0.049","0.041","0.057","0.045","0.032","0.254","0.037","0.703","0.104","0.101","0.041","0.053","0.043","0.043","0.043","0.052","0.037","0.035","0.056","0.486","0.041","0.041","1.000","0.054","0.081","0.073","1.000","0.035","0.067","_","0.252","0.608","0.070","0.137","0.053","0.098","0.057","0.310","1.000","0.147","0.116","0.082","0.138","0.268","0.057","0.183","1.000","0.333","0.475","0.583","0.465","0.254","0.353","0.371","1.000","0.556","0.955","0.480","0.993","0.998","_","1.000","_"],["0.371","0.401","0.267","_","_","_","_","0.332","_","_","0.499","_","_","_","0.358","_","_","0.847","_","_","0.673","_","0.558","_","0.377","_","0.718","0.510","_","0.649","_","_","0.591","_","_","_","_","_","0.561","0.765","_","_","_","0.620","0.516","_","0.428","_","_","0.766","_","_","0.837","0.459","_","0.669","_","0.764","0.976","0.527","0.422","_","0.488","0.484","_","_","0.880","0.561","_","0.301","_","_","0.585","_","0.876","_","_","0.694","0.463","_","_","0.696","0.700","_","0.715","_","_","0.720","_","0.899","_","0.731","0.883","_","0.843","0.652","_","0.648","0.610","_","_","0.730","0.884","_","_","_","0.752"],["2019_06_13","2019_06_21","2019_07_01","2019_08_28","2019_08_14","2019_09_27","2019_09_03","2019_06_25","2019_03_01","2019_08_13","2019_07_10","2019_10_08","2019_08_22","2019_10_15","2019_06_27","2019_03_01","2019_07_12","2019_06_06","2019_08_19","2019_10_07","2019_07_10","2019_10_16","2019_06_19","2019_08_13","2019_06_03","2019_09_27","2019_06_14","2019_06_12","2019_10_07","2019_06_04","2019_09_03","2019_10_03","2019_06_26","2019_08_01","2019_03_01","2019_08_13","2019_07_22","2019_03_01","2019_06_03","2019_06_03","2019_07_31","2019_10_11","2019_10_10","2019_06_12","2019_06_12","2019_03_01","2018_06_13","2019_03_01","2019_03_01","2019_06_03","2019_03_01","2019_07_22","2018_10_19","2019_07_05","2019_10_15","2019_06_03","2019_03_01","2019_07_08","2019_06_19","2019_07_11","2019_06_27","2019_08_26","2018_10_18","2019_07_05","2019_02_28","2019_07_31","2019_06_28","2018_10_16","2019_10_08","2018_10_19","2019_06_27","2019_10_22","2018_10_18","2019_02_26","2018_10_19","2019_02_26","2019_03_01","2019_06_19","2018_06_15","2019_08_23","2019_03_01","2019_07_01","2018_10_19","2019_03_01","2018_06_12","2019_03_01","2019_03_01","2019_06_17","2019_10_22","2018_01_13","2019_06_19","2019_06_28","2018_06_08","2019_09_27","2017_06_22","2018_10_17","2019_08_07","2019_06_12","2018_01_30","2019_03_01","2019_10_11","2019_06_19","2018_10_17","2019_08_06","2019_05_29","2017_06_26","2017_06_12"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>#<\/th>\n      <th>Developer<\/th>\n      <th>VISA Photos FNMR @ FMR ≤ 0.000001<\/th>\n      <th>VISA Photos FNMR @ FMR ≤ 0.0001<\/th>\n      <th>MUGSHOT Photos FNMR @ FMR ≤ 0.00001<\/th>\n      <th>MUGSHOT Photos FNMR @ FMR ≤ 0.00001 DT=14 YRS<\/th>\n      <th>VISABORDER Photos FNMR@ FMR ≤ 0.000001<\/th>\n      <th>WILD Photos FNMR@ FMR ≤ 0.00001<\/th>\n      <th>CHILD EXP Photos FNMR@ FMR ≤ 0.01<\/th>\n      <th>Submission Date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"lfBrtip","buttons":["csv",{"extend":"pdf","pageSize":"A4","orientation":"landscape","filename":"tt"}],"scrollX":true,"scrollCollapse":true,"initComplete":"function(settings, json) {$(this.api().table().header()).css({'font-size' : '12px'});}","search":{"regex":true,"caseInsensitive":false},"pageLength":20,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[6]; $(this.api().cell(row, 6).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[7]; $(this.api().cell(row, 7).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[8]; $(this.api().cell(row, 8).node()).css({'text-align':'center','font-size':'80%'});\nvar value=data[9]; $(this.api().cell(row, 9).node()).css({'text-align':'center','font-size':'80%'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
 Additional algorithms not listed in the leaderboard can be found in Table 2 of our latest FRVT report. It is a draft made available for comments. It will be updated on a monthly basis as algorithms and computations complete, as datasets are added, and as new analyses are developed.</p>
 <hr />
 </div>
 <div id="prior-editions-of-report" class="section level2">
 <h2>Prior editions of report</h2>
-<p>2019-07-31 | 2019-07-03 | 2019-06-20 | 2019-04-12 | 2019-04-04 | 2019-01-29 | 2018-06-21 | 2018-06-18 | 2018-04-03 | 2018-02-15 | 2018-01-25 | 2017-12-14 | 2017-11-16 | 2017-10-03 | 2017-08-25 | 2017-08-07 | 2017-07-31 | 2017-05-15 | 2017-05-01 | 2017-04-12 | 2017-04-03 | 2017-03-23.</p>
+<p><a href="https://www.nist.gov/system/files/documents/2019/10/16/frvt_report_2019_10_16.pdf">2019-10-16</a> | <a href="https://www.nist.gov/system/files/documents/2019/09/11/frvt_report_2019_09_11.pdf">2019-09-11</a> | <a href="https://www.nist.gov/system/files/documents/2019/07/31/frvt_report_2019_07_31.pdf">2019-07-31</a> | <a href="https://www.nist.gov/system/files/documents/2019/07/03/frvt_report_2019_07_03.pdf">2019-07-03</a> | <a href="https://www.nist.gov/system/files/documents/2019/06/20/frvt_report_2019_06_20.pdf">2019-06-20</a> | <a href="https://www.nist.gov/system/files/documents/2019/04/15/frvt_report_2019_04_12.pdf">2019-04-12</a> | <a href="https://www.nist.gov/system/files/documents/2019/04/04/frvt_report_2019_04_04.pdf">2019-04-04</a> | <a href="https://www.nist.gov/system/files/documents/2019/01/29/frvt_report_2019_01_29.pdf">2019-01-29</a> | <a href="https://www.nist.gov/system/files/documents/2018/06/21/frvt_report_2018_06_21.pdf">2018-06-21</a> | <a href="https://www.nist.gov/system/files/documents/2018/06/18/report_2018_06_18.pdf">2018-06-18</a> | <a href="https://www.nist.gov/system/files/documents/2018/04/03/frvt_report_2018_04_03.pdf">2018-04-03</a> | <a href="https://www.nist.gov/system/files/documents/2018/02/15/frvt_report_2018_02_15.pdf">2018-02-15</a> | <a href="https://www.nist.gov/system/files/documents/2018/01/29/frvt_report_2018_01_25.pdf">2018-01-25</a> | <a href="https://www.nist.gov/system/files/documents/2017/12/14/frvt_report_2017_12_14.pdf">2017-12-14</a> | <a href="https://www.nist.gov/system/files/documents/2017/11/16/frvt_report_2017_11_16.pdf">2017-11-16</a> | <a href="https://www.nist.gov/system/files/documents/2017/10/03/frvt_report_2017_10_03.pdf">2017-10-03</a> | <a href="https://www.nist.gov/system/files/documents/2017/08/25/frvt_report_2017_08_25.pdf">2017-08-25</a> | <a href="https://www.nist.gov/system/files/documents/2017/08/07/frvt_report_2017_08_07.pdf">2017-08-07</a> | <a href="https://www.nist.gov/system/files/documents/2017/07/31/frvt_report_2017_07_29.pdf">2017-07-31</a> | <a href="https://www.nist.gov/system/files/documents/2018/02/09/frvt_report_2017-05-15.pdf">2017-05-15</a> | <a href="https://www.nist.gov/system/files/documents/2018/02/09/frvt_report_2017_05_01.pdf">2017-05-01</a> | <a href="https://www.nist.gov/system/files/documents/2018/02/09/frvt_report_2017_04_12.pdf">2017-04-12</a> | <a href="https://www.nist.gov/system/files/documents/2018/02/09/frvt_report_2017_04_03.pdf">2017-04-03</a> | <a href="https://www.nist.gov/system/files/documents/2017/03/23/report.pdf">2017-03-23</a></p>
 <p>Developers may submit their algorithms at any time by following instructions below. Results will be posted as soon as algorithms successfully complete the tests.</p>
 </div>
 <div id="overview" class="section level2">
@@ -4087,7 +4244,7 @@ Additional algorithms not listed in the leaderboard can be found in Table 2 of o
 </div>
 <div id="validation" class="section level3">
 <h3>Validation</h3>
-<p>An updated validation package has been published. All participants must run their software through the updated validation package prior to submission. The purpose of validation is to ensure consistent algorithm output between your execution and NIST’s execution. [last update: 2019-04-02]</p>
+<p>An updated validation package has been published. All participants must run their software through the updated validation package prior to submission. The purpose of validation is to ensure consistent algorithm output between your execution and NIST’s execution. Note: The provider identifier in the core implementation library must be an appropriate, representative, non-infringing name of the main provider of the software. If the provider identifier is not representative of the submitting organization, NIST reserves the right to reject the submission for testing. [last update: 2019-04-02]</p>
 </div>
 <div id="encryption" class="section level3">
 <h3>Encryption</h3>
