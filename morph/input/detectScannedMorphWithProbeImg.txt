@@ -1,6 +1,0 @@
-../common/images/scanned_007_morph.ppm ../common/images/live_001.ppm
-../common/images/scanned_007_morph.ppm ../common/images/live_002.ppm
-../common/images/scanned_005_morph.ppm ../common/images/live_003.ppm
-../common/images/scanned_001_morph.ppm ../common/images/live_004.ppm
-../common/images/scanned_8888_morph.ppm ../common/images/live_8886.ppm
-../common/images/scanned_8888_morph.ppm ../common/images/live_8887.ppm

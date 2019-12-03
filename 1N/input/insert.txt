@@ -1,5 +1,0 @@
-4 ../common/images/S001-04-t10_01.ppm UNKNOWN
-2 ../common/images/S001-02-t10_01.ppm UNKNOWN
-6 ../common/images/S001-06-t10_01.ppm UNKNOWN
-8 ../common/images/S001-08-t10_01.ppm UNKNOWN
-10 ../common/images/S001-08-t10_03.ppm UNKNOWN

@@ -1,8 +1,0 @@
-1 ../common/images/S001-01-t10_01.ppm UNKNOWN ../common/images/S001-03-t10_01.ppm UNKNOWN ../common/images/S001-05-t10_01.ppm UNKNOWN ../common/images/S001-07-t10_01.ppm UNKNOWN ../common/images/S001-08-t10_02.ppm UNKNOWN ../common/images/S001-09-t10_01.ppm UNKNOWN
-21 ../common/images/S008-02-t10_01.ppm UNKNOWN ../common/images/S008-04-t10_01.ppm UNKNOWN ../common/images/S008-06-t10_01.ppm
-45 ../common/images/S023-01-t10_01.ppm UNKNOWN ../common/images/S023-03-t10_01.ppm UNKNOWN
-59 ../common/images/S030-01-t10_01.ppm UNKNOWN ../common/images/S030-03-t10_01.ppm UNKNOWN ../common/images/S030-05-t10_01.ppm UNKNOWN
-65 ../common/images/S031-02-t10_01.ppm UNKNOWN ../common/images/S031-04-t10_01.ppm UNKNOWN ../common/images/S031-06-t10_01.ppm UNKNOWN
-73 ../common/images/S033-01-t10_01.ppm UNKNOWN ../common/images/S033-03-t10_01.ppm UNKNOWN ../common/images/S033-05-t10_01.ppm UNKNOWN ../common/images/S033-07-t10_01.ppm UNKNOWN
-93 ../common/images/S044-02-t10_01.ppm UNKNOWN ../common/images/S044-04-t10_01.ppm UNKNOWN ../common/images/S044-06-t10_01.ppm UNKNOWN ../common/images/S044-08-t10_01.ppm UNKNOWN
-107 ../common/images/S048-02-t10_01.ppm UNKNOWN ../common/images/S048-04-t10_01.ppm UNKNOWN ../common/images/S048-06-t10_01.ppm UNKNOWN

@@ -1,6 +1,0 @@
-../common/images/IMG_3760_morph.ppm ../common/images/live_001.ppm
-../common/images/IMG_3760_morph.ppm ../common/images/live_002.ppm
-../common/images/IMG_3753_morph.ppm ../common/images/live_003.ppm
-../common/images/IMG_3744_morph.ppm ../common/images/live_004.ppm
-../common/images/IMG_8888_morph.ppm ../common/images/live_8886.ppm
-../common/images/IMG_8888_morph.ppm ../common/images/live_8887.ppm
