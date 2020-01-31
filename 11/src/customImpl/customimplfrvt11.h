@@ -16,8 +16,6 @@
 #include "face_align.hpp"
 #include "mxnet_mtcnn.hpp"
 #include "feature_extract.hpp"
-// #include "make_label.hpp"
-// #include "comm_lib.hpp"
 
 /*
  * Declare the implementation class of the FRVT 1:1 Interface
@@ -53,9 +51,6 @@ private:
     static const int featureVectorSize{4};
     // Some other members
 
-    // Mtcnn * m_mtcnn;
-    // MxNetMtcnn* mDetector;
-    // Mxnet_extract* mExtract;
     std::shared_ptr<MxNetMtcnn> mFaceDetector;
     std::shared_ptr<Mxnet_extract> mExtractor;
 };

@@ -58,20 +58,13 @@ CustomImplFRVT11::initialize(const std::string &configDir)
     mFaceDetector = std::make_shared<MxNetMtcnn>();
     mExtractor = std::make_shared<Mxnet_extract>();
 
-    // std::string type = "mxnet";
     std::string mtcnn_model = configDir + "/mtcnn_model";
     mFaceDetector->LoadModule(mtcnn_model);
 
 
     std::string feature_model = configDir + "/model-r100-ii";
-    // std::string feature_model = configDir + "/feature_model";
     mExtractor->LoadExtractModule(feature_model + "/model-0000.params",
         feature_model + "/model-symbol.json", 1, 3, 112, 112);
-
-    // m_mtcnn = MtcnnFactory::CreateDetector(type);
-
-    // m_mtcnn->LoadModule(model_dir);
-
 
     return ReturnStatus(ReturnCode::Success);
 }
@@ -94,15 +87,12 @@ CustomImplFRVT11::createTemplate(
 
         if (face_info.size() == 0) continue;
 
-        // for(unsigned int i = 0; i < face_info.size(); i++) {
         face_box& box = face_info[0];
 
         eyeCoordinates.push_back(EyePair(true, true,
         box.landmark.x[0],box.landmark.y[0],
         box.landmark.x[1],box.landmark.y[1]));
 
-
-        // cv::Mat features;
         float v2[5][2] =
         { { box.landmark.x[0] , box.landmark.y[0] },
             { box.landmark.x[1] , box.landmark.y[1] },
@@ -118,22 +108,13 @@ CustomImplFRVT11::createTemplate(
         cv::Size size(112, 112);
 
         cv::Mat transfer = m(cv::Rect(0, 0, 3, 2));
-        // std::cout << "TTTT:" << m << std::endl;
+
         cv::warpAffine(image, aligned, transfer, size, 1, 0, 0);
 
         cv::Mat output = mExtractor->extractFeature(aligned);
-
-        // std::cout << "BBB: " << output.cols << std::endl;
         std::vector<float>out_vec(output.begin<float>(), output.end<float>());
 
-        // std::cout << "CCC: " << out_vec.size() << std::endl;
-
         templates.push_back(std::vector<float>(out_vec.begin(), out_vec.end()));
-
-        //std::cout << "TTTT:" << output.rows << " " << output.cols << std::endl;
-        
-        // features.push_back(output);
-        // }
     }
     /* Note: example code, potentially not portable across machines. */
     // std::vector<float> fv = {1.0, 2.0, 8.88, 765.88989};
@@ -141,7 +122,7 @@ CustomImplFRVT11::createTemplate(
         cv::Mat output_features = AveragePoolOnTemplates(templates);
         CvMatToTemplate(output_features, templ);
     } else {
-        std::cout << "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW" << std::endl;
+
     }
 
     return ReturnStatus(ReturnCode::Success);
@@ -165,7 +146,6 @@ CustomImplFRVT11::matchTemplates(
         similarity = ab / (
             cv::norm(f1, cv::NORM_L2) * cv::norm(f1, cv::NORM_L2)
         );
-        std::cout << "AAAA: " << similarity << std::endl;
     }
     return ReturnStatus(ReturnCode::Success);
 }
