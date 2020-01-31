@@ -1,0 +1,5 @@
+bin/
+build/
+11/config/model-r100-ii
+11/config/mtcnn_model
+validation/
