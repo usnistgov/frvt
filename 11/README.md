@@ -43,9 +43,8 @@ $ ./run_validation_11.sh
 
    For example:
 ````console
-$ gpg --default-key <ParticipantEmail> --output <filename>.gpg \\
---encrypt --recipient frvt@nist.gov --sign \\
-libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
+$ gpg --default-key <ParticipantEmail> --output <filename>.gpg --encrypt \\
+--recipient frvt@nist.gov --sign libfrvt_11_<company>_<three-digit submission sequence>.tar.gz
 ````
 
 6) Send the encrypted file and your public key to NIST.  You can
