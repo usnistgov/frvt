@@ -42,11 +42,11 @@ $ ./run_validation_11.sh
    https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist.
 
    For example:
-   ````console
+````console
 $ gpg --default-key <ParticipantEmail> --output <filename>.gpg \\
 --encrypt --recipient frvt@nist.gov --sign \\
 libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
-  ````
+````
 
 6) Send the encrypted file and your public key to NIST.  You can
 - Email the files to frvt@nist.gov if your package is less than 20MB OR
