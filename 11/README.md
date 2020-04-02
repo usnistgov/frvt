@@ -27,8 +27,9 @@ to send to NIST, please perform the following steps:
 3) Put a version.txt file into ./doc, which provides version control information for the submission.
 
 4) From the root validation directory, execute the validation script.
-    ./run_validate_11.sh
-
+````console
+$ ./run_validation_11.sh
+````
    The validation script will
    - Compile and link your library against the validation test harness. 
    - Run the test harness that was built against your library on the validation dataset.
