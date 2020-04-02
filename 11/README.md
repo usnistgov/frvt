@@ -1,39 +1,22 @@
-===============================
-FRVT validation package, NIST
-===============================
+# FRVT 1:1 validation package, NIST
 The purpose of this validation package is to 
 1) ensure that NIST's execution of your library submission produces the expected output and
 2) prepare your submission package to send to NIST
 
-The code provided here is meant only for validation purposes and does not reflect how 
-NIST will perform actual testing.  Please note that this validation package must be installed
-and run on Centos 7.6, which can be downloaded from 
-http://nigos.nist.gov:8080/evaluations/CentOS-7-x86_64-Everything-1810.iso.
+The code provided here is meant only for validation purposes and does not reflect how NIST will perform actual testing.  Please note that this validation package must be installed and run on Centos 7.6, which can be downloaded from http://nigos.nist.gov:8080/evaluations/CentOS-7-x86_64-Everything-1810.iso.
 
-===============================
-Validation Dataset
-===============================
+# Validation Dataset
 The ../common/images directory will contain all of the images necessary for validation.
 
-NOTE: The validation images are used for the sole purpose of validation and stress-testing
-your software.  The images are not necessarily representative of actual test data that will 
-be used to evaluate the implementations.  Please do not contact NIST about actual testing
-with such validation-type imagery.
+NOTE: The validation images are used for the sole purpose of validation and stress-testing your software.  The images are not necessarily representative of actual test data that will be used to evaluate the implementations.  Please do not contact NIST about actual testing with such validation-type imagery.
 
-===============================
-Null Implementation
-===============================
-There is a null implementation of the FRVT 1:1 API in ./src/nullImpl.  While the 
-null implementation doesn't actually provide any real functionality, more importantly, 
-it demonstrates mechanically how one could go about implementing, compiling, and building 
+# Null Implementation
+There is a null implementation of the FRVT 1:1 API in ./src/nullImpl.  While the null implementation doesn't actually provide any real functionality, more importantly, it demonstrates mechanically how one could go about implementing, compiling, and building 
 a library against the API.
 
-To compile and build the null implementation, from the top level validation directory
-run ./scripts/build_null_impl.sh.  This will place the implementation library into ./lib.
+To compile and build the null implementation, from the top level validation directory run ./scripts/build_null_impl.sh.  This will place the implementation library into ./lib.
 
-===============================
-Validation and Submission Preparation
-===============================
+# Validation and Submission Preparation
 To successfully complete the validation process, and to prepare your submission package
 to send to NIST, please perform the following steps:
 
@@ -74,15 +57,8 @@ The validation script will
 
 Send any questions or concerns regarding this validation package to frvt@nist.gov.
 
-===============================
-Acceptance
-===============================
-NIST will validate the correct operation of the submissions on our platform
-by attempting to duplicate the submitted results using our own test driver
-linked with the participant's libraries.  In addition, NIST will perform
-a separate timing test to ensure the implementation meets the timing requirements
-for certain tasks as detailed in the FRVT Ongoing 1:1 API document.
+# Acceptance
+NIST will validate the correct operation of the submissions on our platform by attempting to duplicate the submitted results using our own test driver linked with the participant's libraries.  In addition, NIST will perform a separate timing test to ensure the implementation meets the timing requirements for certain tasks as detailed in the FRVT Ongoing 1:1 API document.
 
-Any discrepancies will be reported to the participant, and reasonable attempts
-will be made to resolve the issue. 
+Any discrepancies will be reported to the participant, and reasonable attempts will be made to resolve the issue. 
 
