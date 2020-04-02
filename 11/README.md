@@ -29,11 +29,10 @@ to send to NIST, please perform the following steps:
 4) From the root validation directory, execute the validation script.
     ./run_validate_11.sh
 
-The validation script will
-- Compile and link your library against the validation test harness. 
-- Run the test harness that was built against your library on the validation
-  dataset.
-- Prepare your submission archive. 
+   The validation script will
+   - Compile and link your library against the validation test harness. 
+   - Run the test harness that was built against your library on the validation dataset.
+   - Prepare your submission archive. 
 
 5) Upon successful validation, an archive will be generated named 
    libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
@@ -49,11 +48,9 @@ The validation script will
 	libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
 
 6) Send the encrypted file and your public key to NIST.  You can
-	a) Email the files to frvt@nist.gov if your package is less than 20MB OR
-	b) Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of
-	   membership on the provided website).  The preferred mechanism is Google Drive.  We do NOT accept
-	   Dropbox links. OR
-	c) Mail a CD/DVD to NIST at the address provided in the participation agreement
+	- Email the files to frvt@nist.gov if your package is less than 20MB OR
+	- Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of membership on the provided website).  The preferred mechanism is Google Drive.  We do NOT accept Dropbox links. OR
+	- Mail a CD/DVD to NIST at the address provided in the participation agreement
 
 Send any questions or concerns regarding this validation package to frvt@nist.gov.
 
