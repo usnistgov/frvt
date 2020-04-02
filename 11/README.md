@@ -1,4 +1,4 @@
-# FRVT 1:1 validation package, NIST
+# FRVT 1:1 validation package
 The purpose of this validation package is to
 1) ensure that NIST's execution of your library submission produces the expected output and
 2) prepare your submission package to send to NIST
@@ -14,7 +14,12 @@ NOTE: The validation images are used for the sole purpose of validation and stre
 There is a null implementation of the FRVT 1:1 API in ./src/nullImpl.  While the null implementation doesn't actually provide any real functionality, more importantly, it demonstrates mechanically how one could go about implementing, compiling, and building
 a library against the API.
 
-To compile and build the null implementation, from the top level validation directory run ./scripts/build_null_impl.sh.  This will place the implementation library into ./lib.
+To compile and build the null implementation, from the top level validation directory run 
+
+````console
+$ ./scripts/build_null_impl.sh
+````
+This will place the implementation library into ./lib.
 
 # Validation and Submission Preparation
 To successfully complete the validation process, and to prepare your submission package
