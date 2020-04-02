@@ -1,5 +1,5 @@
 # FRVT 1:1 validation package, NIST
-The purpose of this validation package is to 
+The purpose of this validation package is to
 1) ensure that NIST's execution of your library submission produces the expected output and
 2) prepare your submission package to send to NIST
 
@@ -11,7 +11,7 @@ The ../common/images directory will contain all of the images necessary for vali
 NOTE: The validation images are used for the sole purpose of validation and stress-testing your software.  The images are not necessarily representative of actual test data that will be used to evaluate the implementations.  Please do not contact NIST about actual testing with such validation-type imagery.
 
 # Null Implementation
-There is a null implementation of the FRVT 1:1 API in ./src/nullImpl.  While the null implementation doesn't actually provide any real functionality, more importantly, it demonstrates mechanically how one could go about implementing, compiling, and building 
+There is a null implementation of the FRVT 1:1 API in ./src/nullImpl.  While the null implementation doesn't actually provide any real functionality, more importantly, it demonstrates mechanically how one could go about implementing, compiling, and building
 a library against the API.
 
 To compile and build the null implementation, from the top level validation directory run ./scripts/build_null_impl.sh.  This will place the implementation library into ./lib.
@@ -20,9 +20,9 @@ To compile and build the null implementation, from the top level validation dire
 To successfully complete the validation process, and to prepare your submission package
 to send to NIST, please perform the following steps:
 
-1) Put all required configuration files into ./config
+1) Put all required configuration files into ./config.
 
-2) Put your core implementation library and ALL dependent libraries into ./lib
+2) Put your core implementation library and ALL dependent libraries into ./lib.
 
 3) Put a version.txt file into ./doc, which provides version control information for the submission.
 
@@ -31,28 +31,33 @@ to send to NIST, please perform the following steps:
 $ ./run_validation_11.sh
 ````
    The validation script will
-   - Compile and link your library against the validation test harness. 
+   - Compile and link your library against the validation test harness.
    - Run the test harness that was built against your library on the validation dataset.
-   - Prepare your submission archive. 
+   - Prepare your submission archive.
 
-5) Upon successful validation, an archive will be generated named 
+5) Upon successful validation, an archive will be generated named
    libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
 
-   This archive must be properly encrypted and signed before transmission to NIST.  This must be done according to these instructions - https://www.nist.gov/system/files/nist_encryption.pdf using the LATEST FRVT Ongoing public key linked from - 
-   https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist. 
+   This archive must be properly encrypted and signed before transmission to NIST.  This must be done according to these instructions - https://www.nist.gov/system/files/nist_encryption.pdf using the LATEST FRVT Ongoing public key linked from -
+   https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist.
 
    For example:
-	gpg --default-key <ParticipantEmail> --output <filename>.gpg --encrypt --recipient frvt@nist.gov --sign libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
+   ````console
+$ gpg --default-key <ParticipantEmail> --output <filename>.gpg \\
+--encrypt --recipient frvt@nist.gov --sign \\
+libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
+  ````
 
 6) Send the encrypted file and your public key to NIST.  You can
-	- Email the files to frvt@nist.gov if your package is less than 20MB OR
-	- Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of membership on the provided website).  The preferred mechanism is Google Drive.  We do NOT accept Dropbox links. OR
-	- Mail a CD/DVD to NIST at the address provided in the participation agreement
+- Email the files to frvt@nist.gov if your package is less than 20MB OR
+- Provide a download link from a generic http webserver (NIST will NOT register or establish any kind of membership on the provided website).  The preferred mechanism is Google Drive.  We do NOT accept Dropbox links. OR
+- Mail a CD/DVD to NIST at the address provided in the participation agreement
+
+7) Participants must [subscribe](mailto:frvt-news+subscribe@list.nist.gov) to the FRVT mailing list to receive emails when new reports are published or announcements are made.
 
 Send any questions or concerns regarding this validation package to frvt@nist.gov.
 
 # Acceptance
-NIST will validate the correct operation of the submissions on our platform by attempting to duplicate the submitted results using our own test driver linked with the participant's libraries.  In addition, NIST will perform a separate timing test to ensure the implementation meets the timing requirements for certain tasks as detailed in the FRVT Ongoing 1:1 API document.
+NIST will validate the correct operation of the submissions on our platform by attempting to duplicate the submitted results using our own test driver linked with the participant's libraries.  In addition, NIST will perform a separate timing test to ensure the implementation meets the timing requirements for certain tasks as detailed in the [FRVT Ongoing 1:1 API document](https://pages.nist.gov/frvt/html/frvt11.html).
 
-Any discrepancies will be reported to the participant, and reasonable attempts will be made to resolve the issue. 
-
+Any discrepancies will be reported to the participant, and reasonable attempts will be made to resolve the issue.
