@@ -27,7 +27,7 @@ to send to NIST, please perform the following steps:
 3) Put a version.txt file into ./doc, which provides version control information for the submission.
 
 4) From the root validation directory, execute the validation script.
-   >> ./run_validate_11.sh
+    ./run_validate_11.sh
 
 The validation script will
 - Compile and link your library against the validation test harness. 
@@ -36,7 +36,7 @@ The validation script will
 - Prepare your submission archive. 
 
 5) Upon successful validation, an archive will be generated named 
-   libfrvt_11_<company>_<three-digit submission sequence>.tar.gz
+   libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
 
    This archive must be properly encrypted and signed before transmission to NIST.  
    This must be done according to these instructions - https://www.nist.gov/sites/default/files/nist_encryption.pdf
@@ -46,7 +46,7 @@ The validation script will
    For example:
 	gpg --default-key <ParticipantEmail> --output <filename>.gpg \\
 	--encrypt --recipient frvt@nist.gov --sign \\
-	libfrvt_11_<company>_<three-digit submission sequence>.tar.gz
+	libfrvt_11_\<company\>_\<three-digit submission sequence\>.tar.gz
 
 6) Send the encrypted file and your public key to NIST.  You can
 	a) Email the files to frvt@nist.gov if your package is less than 20MB OR
