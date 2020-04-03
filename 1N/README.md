@@ -9,7 +9,7 @@ The code provided here is meant only for validation purposes and does not reflec
 http://nigos.nist.gov:8080/evaluations/CentOS-7-x86_64-Everything-1810.iso.
 
 
-# IMPORTANT NOTES
+# Important Notes
 Please confirm that your software can handle very very large enrollment database sizes.  Specifically, please ensure that your software (especially during finalization and search) can handle processing an EDB (enrollment database) that exceeds 2<sup>32</sup> bytes in size.  In other words, use 64-bit types when you need them.
 
 # Validation Dataset
