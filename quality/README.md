@@ -1,4 +1,4 @@
-# FRVT validation package
+# FRVT Quality Assessment validation package
 The purpose of this validation package is to
 1) ensure that NIST's execution of your library submission produces the expected output and
 2) prepare your submission package to send to NIST
