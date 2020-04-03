@@ -16,7 +16,7 @@ a library against the API.
 
 To compile and build the null implementation, from the top level validation directory run 
 
-````console
+````
 $ ./scripts/build_null_impl.sh
 ````
 This will place the implementation library into ./lib.
