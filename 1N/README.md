@@ -53,7 +53,7 @@ The validation script will
    https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist.
 
    For example:
-````console
+````
 $ gpg --default-key <ParticipantEmail> --output <filename>.gpg --encrypt \\
 --recipient frvt@nist.gov --sign libfrvt_1N_<company>_<three-digit submission sequence>.tar.gz
 ````
