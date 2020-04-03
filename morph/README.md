@@ -43,7 +43,7 @@ The validation script will
    This archive must be properly encrypted and signed before transmission to NIST.  This must be done according to these instructions - https://www.nist.gov/system/files/nist_encryption.pdf using the LATEST FRVT Ongoing public key linked from - https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist.
 
    For example:
-````console
+````
 $ gpg --default-key <ParticipantEmail> --output <filename>.gpg --encrypt \\
 --recipient frvt@nist.gov --sign libfrvt_morph_<company>_<three-digit submission sequence>.tar.gz
 ````
