@@ -16,7 +16,7 @@ a library against the API.
 
 To compile and build the null implementation, from the top level validation directory run 
 
-````
+````console
 $ ./scripts/build_null_impl.sh
 ````
 This will place the implementation library into ./lib.
@@ -47,7 +47,7 @@ $ ./run_validation_11.sh
    https://www.nist.gov/itl/iad/image-group/products-and-services/encrypting-softwaredata-transmission-nist.
 
    For example:
-````console
+````
 $ gpg --default-key <ParticipantEmail> --output <filename>.gpg --encrypt \\
 --recipient frvt@nist.gov --sign libfrvt_11_<company>_<three-digit submission sequence>.tar.gz
 ````
