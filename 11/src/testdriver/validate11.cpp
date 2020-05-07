@@ -69,7 +69,7 @@ createTemplate(
 
     /* header */
     logStream << "id image templateSizeBytes returnCode isLeftEyeAssigned "
-            "isRightEyeAssigned xleft yleft xright yright quality" << endl;
+            "isRightEyeAssigned xleft yleft xright yright" << endl;
 
     string id, imagePath, desc;
     while (inputStream >> id >> imagePath >> desc) {
