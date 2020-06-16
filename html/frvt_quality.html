@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -1360,7 +1360,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -1422,6 +1421,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -1434,48 +1434,9 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4,h5",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -1489,6 +1450,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -1634,6 +1601,10 @@ font-size: 16px;
 .nist-header__logo-link {
 display: inline-block;
 height: 35px;
+}
+
+.nist-header__logo-link svg {
+vertical-align: inherit;
 }
 .nist-header__logo-icon {
 fill: #fff;
@@ -1864,7 +1835,8 @@ The quality-as-predictor-of-recognition approach has been successful in the deve
 <p>To participate in this evaluation, developers need to submit a participation agreement to NIST, wrap their software behind the published C++ API, run their libraries through the provided validation package (which creates a submission package), encrypt the package, and provide a download link for the encrypted submission package. More details are provided below.</p>
 <div id="participation-agreement" class="section level3">
 <h3>Participation Agreement</h3>
-<p>All organizations who seek to participate in FRVT must sign and submit all pages of this <a href="https://www.nist.gov/document/frvtparticipationagreementpdf">Participation Agreement</a>. NOTE: Organizations that have already submitted a participation agreement for FRVT Ongoing 1:1 do not need to send in a new participation agreement UNLESS the organization updates their cryptographic signing key. [last update: 2019-04-23]</p>
+<p>All organizations who seek to participate in FRVT must sign and submit all pages of this <a href="https://www.nist.gov/document/frvtparticipationagreementpdf">Participation Agreement</a> by mail AND send a PDF scanned copy to <a href="mailto:frvt@nist.gov">frvt@nist.gov</a>.<br />
+[NOTE:] Organizations that have already submitted a participation agreement for FRVT Ongoing 1:1 do not need to send in a new participation agreement UNLESS the organization updates their cryptographic signing key. [last update: 2020-06-15]</p>
 </div>
 <div id="api-document" class="section level3">
 <h3>API Document</h3>
@@ -1930,6 +1902,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
