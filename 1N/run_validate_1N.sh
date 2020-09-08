@@ -6,7 +6,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 # Check version of OS
-reqOS="CentOS Linux release 7.6.1810 (Core) "
+reqOS="CentOS Linux release 8.2.2004 (Core) "
 currentOS=$(cat /etc/centos-release)
 if [ "$reqOS" != "$currentOS" ]; then
 	echo "${bold}[ERROR] You are not running the correct version of the operating system, which should be $reqOS.  Please install the correct operating system and re-run this validation package.${normal}"
@@ -15,7 +15,7 @@ fi
 
 # Install the necessary packages to run validation
 echo -n "Checking installation of required packages "
-for package in coreutils gawk gcc gcc-c++ grep cmake sed
+for package in coreutils gawk gcc gcc-c++ grep cmake make sed
 do
 	yum -q list installed $package &> /dev/null
 	retcode=$?
@@ -100,6 +100,9 @@ do
                 exit $failure
         fi
 done
+
+# write OS to text file
+cat /etc/redhat-release > validation/os.txt
 
 tar -zcf $libstring.tar.gz ./doc ./config ./lib ./validation
 echo "[SUCCESS]"

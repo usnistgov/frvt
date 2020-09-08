@@ -28,9 +28,9 @@ function merge() {
 # left over from previous validation run
 kill -9 $(ps -aef | grep "count_thread" | awk '{ print $2 }') 2> /dev/null
 
-configDir=config
+configDir=$(pwd)/config
 if [ ! -e "$configDir" ]; then
-	echo "${bold}[ERROR] Missing ./$configDir folder!${normal}"
+	echo "${bold}[ERROR] Missing $configDir folder!${normal}"
 	exit $failure	
 fi
 
@@ -63,7 +63,7 @@ inputFile=input/short_enroll.txt
 outputStem=enroll
 
 echo -n "Checking for hard-coded config directory "
-tempConfigDir=otherConfig
+tempConfigDir=$(pwd)/otherConfig
 chmod 775 $configDir; mv $configDir $tempConfigDir; chmod 550 $tempConfigDir
 bin/validate11 createTemplate -x enroll -c $tempConfigDir -o $outputDir -h $outputStem -i $inputFile -t $numForks -j $templatesDir
 retEnroll=$?

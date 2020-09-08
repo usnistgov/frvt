@@ -6,7 +6,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 # Check version of OS
-reqOS="CentOS Linux release 7.6.1810 (Core) "
+reqOS="CentOS Linux release 8.2.2004 (Core) "
 currentOS=$(cat /etc/centos-release)
 if [ "$reqOS" != "$currentOS" ]; then
 	echo "${bold}[ERROR] You are not running the correct version of the operating system, which should be $reqOS.  Please install the correct operating system and re-run this validation package.${normal}"
@@ -15,7 +15,7 @@ fi
 
 # Install the necessary packages to run validation
 echo -n "Checking installation of required packages "
-for package in coreutils gawk gcc gcc-c++ grep cmake sed bc
+for package in coreutils gawk gcc gcc-c++ grep cmake make sed bc
 do
 	yum -q list installed $package &> /dev/null
 	retcode=$?
@@ -67,12 +67,20 @@ do
 		sed '1d' $outputDir/$input.log | awk '{ if($4!=0) print }'
 	fi
 
-	# Check that at least 50% of match scores are unique
 	if [ "$input" == "match" ]; then
+		# Check that at least 50% of match scores are unique
 		minUniqScores=$(echo "$numInputLines * 0.5" | bc | awk '{printf("%d\n",$1 + 0.5)}')
 		numUniqScores=$(sed '1d' $outputDir/$input.log | awk '{ print $3 }' | uniq | wc -l)
 		if [ "$numUniqScores" -lt "$minUniqScores" ]; then
 			echo -e "\n${bold}[WARNING] Your software produces $numUniqScores unique match scores, which is less than 50% unique match score values.  In order to conduct useful analysis, we highly recommend that you fix your software such that it generates at least 50% unique match scores on this validation set.${normal}"
+		fi
+	
+		# Check for negative scores coming from the algorithm
+		numNegativeScores=$(sed '1d' $outputDir/$input.log | awk '{ if($4==0 && ($3+0)<0) print }' | wc -l)
+		if [ "$numNegativeScores" -gt "0" ]; then
+			echo -e "\n${bold}[ERROR] Your software produces $numNegativeScores negative match scores.  Negative scores are not allowed, per the FRVT General Specifications Document.  Please fix your software.${normal}"
+			exit $failure
+			
 		fi
 	fi	
 done
@@ -90,6 +98,9 @@ do
 		exit $failure	
 	fi
 done
+
+# write OS to text file
+cat /etc/redhat-release > validation/os.txt
 
 tar -zcf $libstring.tar.gz ./config ./lib ./validation ./doc
 echo "[SUCCESS]"

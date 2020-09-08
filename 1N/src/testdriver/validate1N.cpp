@@ -360,7 +360,7 @@ main(int argc, char* argv[])
     uint16_t currAPIMajorVersion{1},
 	currAPIMinorVersion{0},
 	currStructsMajorVersion{1},
-	currStructsMinorVersion{0};
+	currStructsMinorVersion{1};
 
     /* Check versioning of both frvt_structs.h and API header file */
     if ((FRVT::FRVT_STRUCTS_MAJOR_VERSION != currStructsMajorVersion) ||

@@ -5,8 +5,7 @@ The purpose of this validation package is to
 1) ensure that NIST's execution of your library submission produces the expected output and
 2) prepare your submission package to send to NIST
 
-The code provided here is meant only for validation purposes and does not reflect how NIST will perform actual testing.  Please note that this validation package must be installed and run on Centos 7.6, which can be downloaded from
-http://nigos.nist.gov:8080/evaluations/CentOS-7-x86_64-Everything-1810.iso.
+The code provided here is meant only for validation purposes and does not reflect how NIST will perform actual testing.  Please note that this validation package must be installed and run on Centos 8.2, which can be downloaded from https://nigos.nist.gov/evaluations/CentOS-8.2.2004-x86_64-dvd1.iso.
 
 
 # Important Notes

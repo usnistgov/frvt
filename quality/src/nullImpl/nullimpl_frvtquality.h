@@ -14,7 +14,7 @@
 #include "frvt_quality.h"
 
 /*
- * Declare the implementation class of the FRVT 1:1 Interface
+ * Declare the implementation class of the FRVT Quality Interface
  */
 namespace FRVT_QUALITY {
     class NullImplFRVTQuality : public FRVT_QUALITY::Interface {
@@ -36,7 +36,6 @@ public:
 
 private:
     std::string configDir;
-    static const int featureVectorSize{4};
     // Some other members
 };
 }
