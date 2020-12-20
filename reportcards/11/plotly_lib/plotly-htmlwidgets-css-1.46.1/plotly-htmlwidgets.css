@@ -7,12 +7,3 @@ see https://github.com/ropensci/plotly/issues/463
 slide:not(.current) .plotly.html-widget{
   display: none;
 }
-/*
-just here so that plotly works
-correctly with ioslides.
-see https://github.com/ropensci/plotly/issues/463
-*/
-
-slide:not(.current) .plotly.html-widget{
-  display: none;
-}
