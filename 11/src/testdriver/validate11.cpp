@@ -71,16 +71,26 @@ createTemplate(
     logStream << "id image templateSizeBytes returnCode isLeftEyeAssigned "
             "isRightEyeAssigned xleft yleft xright yright" << endl;
 
-    string id, imagePath, desc;
-    while (inputStream >> id >> imagePath >> desc) {
-        Image image;
-        if (!readImage(imagePath, image)) {
-            cerr << "[ERROR] Failed to load image file: " << imagePath << "." << endl;
-            raise(SIGTERM);
-        }
-        image.description = mapStringToImgLabel[desc];
+    string id, line; 
+    while (std::getline(inputStream, line)) {
+        auto tokens = split(line, ' ');
+        id = tokens[0];
+        // Get number of image entries in line
+        auto numImages = (tokens.size() - 1)/2;
 
-        Multiface faces{image};
+        Multiface faces;
+        for (unsigned int i=0; i<numImages; i++) {
+            Image image;
+            string imagePath = tokens[(i*2)+1];
+            string desc = tokens[(i*2)+2];
+            if (!readImage(imagePath, image)) {
+                cerr << "Failed to load image file: " << imagePath << "." << endl;
+                raise(SIGTERM);
+            }
+            image.description = mapStringToImgLabel[desc];
+            faces.push_back(image);
+        }
+
         vector<uint8_t> templ;
         vector<EyePair> eyes;
         auto ret = implPtr->createTemplate(faces, role, templ, eyes);
@@ -97,17 +107,20 @@ createTemplate(
         templStream.write((char*)templ.data(), templ.size());
 
         /* Write template stats to log */
-        logStream << id << " "
+        for (unsigned int i=0; i<faces.size(); i++) {
+            string imagePath = tokens[(i*2)+1];
+            logStream << id << " "
                 << imagePath << " "
                 << templ.size() << " "
                 << static_cast<std::underlying_type<ReturnCode>::type>(ret.code) << " "
-                << (eyes.size() > 0 ? eyes[0].isLeftAssigned : false) << " "
-                << (eyes.size() > 0 ? eyes[0].isRightAssigned : false) << " "
-                << (eyes.size() > 0 ? eyes[0].xleft : 0) << " "
-                << (eyes.size() > 0 ? eyes[0].yleft : 0) << " "
-                << (eyes.size() > 0 ? eyes[0].xright : 0) << " "
-                << (eyes.size() > 0 ? eyes[0].yright : 0)
+                << (eyes.size() > 0 ? eyes[i].isLeftAssigned : false) << " "
+                << (eyes.size() > 0 ? eyes[i].isRightAssigned : false) << " "
+                << (eyes.size() > 0 ? eyes[i].xleft : 0) << " "
+                << (eyes.size() > 0 ? eyes[i].yleft : 0) << " "
+                << (eyes.size() > 0 ? eyes[i].xright : 0) << " "
+                << (eyes.size() > 0 ? eyes[i].yright : 0)
                 << endl;
+        }
     }
     inputStream.close();
 

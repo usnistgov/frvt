@@ -108,7 +108,21 @@ if [ "$maxThreads" -gt "2" ]; then
 fi
 rm -rf $outputDir; mkdir -p $templatesDir
 
+echo -n "Creating Enrollment Templates on Multiple Images per Subject (Single Process) "
+inputFile=input/enroll_11_multiface.txt
+bin/validate11 createTemplate -x enroll -c $configDir -o $outputDir -h $outputStem -i $inputFile -t $numForks -j $templatesDir
+retEnroll=$?
+if [ $retEnroll -eq 0 ]; then
+    echo "[SUCCESS]"
+    # Merge output files together
+    merge $outputDir/$outputStem log
+else
+    echo "${bold}[ERROR] Enrollment validation (multiple images per subject) failed${normal}"
+    exit $failure
+fi
+rm -rf $outputDir; mkdir -p $templatesDir
 
+inputFile=input/enroll.txt
 numForks=4
 echo -n "Creating Enrollment Templates (Multiple Processes) "
 bin/validate11 createTemplate -x enroll -c $configDir -o $outputDir -h $outputStem -i $inputFile -t $numForks -j $templatesDir
