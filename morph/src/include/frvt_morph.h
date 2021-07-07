@@ -119,6 +119,11 @@ public:
      * A score on [0, 1] representing how confident the algorithm is that the
      * image contains a morph.  0 means certainty that image does not contain
      * a morph and 1 represents certainty that image contains a morph
+     * @param[in] ageDeltaInDays
+     * Optional input parameter representing the time/age difference 
+     * (in days) between the suspected morph and the live probe image.
+     * Default value is -1, which means the information is not provided
+     * to the function
      */
     virtual FRVT::ReturnStatus
     detectMorphDifferentially(
@@ -126,7 +131,8 @@ public:
         const FRVT::ImageLabel &label,
         const FRVT::Image &probeFace,
         bool &isMorph,
-        double &score) = 0;
+        double &score,
+		const int &ageDeltaInDays = -1) = 0;
 
     /**
      * @brief This function compares two images and outputs a
@@ -184,7 +190,7 @@ extern uint16_t API_MINOR_VERSION;
 /** API major version number. */
 uint16_t API_MAJOR_VERSION{2};
 /** API minor version number. */
-uint16_t API_MINOR_VERSION{0};
+uint16_t API_MINOR_VERSION{1};
 #endif /* NIST_EXTERN_API_VERSION */
 }
 

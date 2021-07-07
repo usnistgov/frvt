@@ -203,7 +203,7 @@ main(
     auto exitStatus = SUCCESS;
 
     uint16_t currAPIMajorVersion{2},
-		currAPIMinorVersion{0},
+		currAPIMinorVersion{1},
 		currStructsMajorVersion{1},
 		currStructsMinorVersion{1};
 

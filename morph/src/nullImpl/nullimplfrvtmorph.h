@@ -41,7 +41,8 @@ public:
         const FRVT::ImageLabel &label,
         const FRVT::Image &liveFace,
         bool &isMorph,
-        double &score) override;
+        double &score,
+        const int &ageDeltaInDays = -1) override;
 
     FRVT::ReturnStatus
     compareImages(

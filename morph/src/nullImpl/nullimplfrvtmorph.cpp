@@ -48,7 +48,8 @@ NullImplFRVTMorph::detectMorphDifferentially(
     const ImageLabel &label,
     const Image &liveFace,
     bool &isMorph,
-    double &score)
+    double &score,
+    const int &ageDeltaInDays)
 {
     if (label==ImageLabel::Unknown)
         return ReturnStatus(ReturnCode::NotImplemented);
