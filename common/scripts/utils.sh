@@ -6,14 +6,14 @@ failure=1
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-reqOS="Ubuntu 20.04.3 LTS"
+reqOS="Ubuntu 20.04"
 
 # Function to check version of OS
 check_os() {
     currentOS=$(lsb_release -a 2> /dev/null | grep "Description" | awk -F":" '{ print $2 }' | sed -e 's/^[[:space:]]*//')
-    if [ "$reqOS" != "$currentOS" ]; then
-        echo "${bold}[ERROR] You are not running the correct version of the operating system, which should be $reqOS.  Please install the correct operating system and re-run this validation package.${normal}"
-        exit $failure
+    if [[ $currentOS != $reqOS* ]]; then
+        echo "[ERROR] You are not running the correct version of the operating system. You should be running Ubuntu 20.04.x. Please install the correct operating system and re-run this validation package."
+        exit 1
     fi
 }
 
