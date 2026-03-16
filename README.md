@@ -1,3 +1,5 @@
+**Do not push to this repository unless you are a member of the NIST team running frvt and its associated evals**   
+or have consulted with the team and been given permission to create a branch and make a pull request.
 
 # Cloning the repository
 We recommend developers clone the entire repository and run validation from within
